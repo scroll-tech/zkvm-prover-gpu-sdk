@@ -6140,18 +6140,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "scroll-zkvm-prover"
-version = "0.1.0"
-dependencies = [
- "anyhow",
- "log",
- "sbv-primitives",
- "scroll-zkvm-prover 0.1.0-rc.8",
- "serde",
- "serde_json",
-]
-
-[[package]]
 name = "scroll-zkvm-verifier"
 version = "0.1.0-rc.8"
 source = "git+https://github.com/scroll-tech/zkvm-prover.git?tag=v0.1.0-rc.8#8278b8d6071e0d62d8fa7c128e138d3ee782c15c"
@@ -7700,6 +7688,18 @@ dependencies = [
  "sha2",
  "sha3",
  "subtle",
+]
+
+[[package]]
+name = "zkp"
+version = "0.1.0"
+dependencies = [
+ "anyhow",
+ "log",
+ "sbv-primitives",
+ "scroll-zkvm-prover",
+ "serde",
+ "serde_json",
 ]
 
 [[package]]
