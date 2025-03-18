@@ -1,7 +1,9 @@
 void init(char* config);
 
-int generate_chunk_proof(char* proof, const char* input, char* fork_name);
+char* generate_chunk_proof(const char* input, char* fork_name);
 
-int generate_batch_proof(char* proof, const char* input, char* fork_name);
+char* generate_batch_proof(const char* input, char* fork_name);
 
-int generate_bundle_proof(char* proof, const char* input, char* fork_name);
+char* generate_bundle_proof(const char* input, char* fork_name);
+
+void free_proof(char* proof);
