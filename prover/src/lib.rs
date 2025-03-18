@@ -10,6 +10,7 @@ use utils::c_char_to_str;
 
 #[no_mangle]
 pub unsafe extern "C" fn init(config: *const c_char) {
+    let _ = env_logger::try_init();
     let config_str = c_char_to_str(config);
     prover::init(config_str.to_string());
 }
