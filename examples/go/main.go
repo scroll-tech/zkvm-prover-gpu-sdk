@@ -33,11 +33,11 @@ func main() {
 	fmt.Println("Batch VK:", go_batch_vk)
 	fmt.Println("Bundle VK:", go_bundle_vk)
 
-
+	// chunk test
 	chunk_input := loadChunkInputs("testdata/")
 	chunk_proof := C.generate_chunk_proof(C.CString(string(chunk_input)), C.CString("euclid"))
 	defer C.free_proof(chunk_proof)
-	fmt.Println("Chunk proof:", go_bundle_vk)
+	fmt.Println("Chunk proof:", chunk_proof)
 	
 	// TODO: add verifier for chunk proof
 
