@@ -83,7 +83,7 @@ fn get_vk(circuit_type: ProofType) -> *mut c_char {
     let prover = prover::get_prover().unwrap();
     match prover.as_ref().get_vk(circuit_type.clone()) {
         Some(vk) => {
-            if let Ok(vk) = CString::new(vk).and_then(|vk| Ok(vk.into_raw())) {
+            if let Ok(vk) = CString::new(base64::encode(vk)).and_then(|vk| Ok(vk.into_raw())) {
                 vk as *mut c_char
             } else {
                 log::error!("failed to copy vk to output buffer");
