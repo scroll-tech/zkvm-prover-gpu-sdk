@@ -1,6 +1,6 @@
 [package]
 name = "zkp"
-version = "0.1.0"
+version = "0.1.0-rc.8"
 edition = "2021"
 
 [lib]

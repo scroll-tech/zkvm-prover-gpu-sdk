@@ -7748,7 +7748,7 @@ dependencies = [
 
 [[package]]
 name = "zkp"
-version = "0.1.0"
+version = "0.1.0-rc.8"
 dependencies = [
  "anyhow",
  "env_logger",
