@@ -8,13 +8,10 @@ package main
 */
 import "C" //nolint:typecheck
 import (
-	// "encoding/json"
 	"io/ioutil"
 	"path/filepath"
 	"fmt"
 	"strings"
-
-	// "github.com/scroll-tech/scroll/common/types"
 )
 
 func main() {
