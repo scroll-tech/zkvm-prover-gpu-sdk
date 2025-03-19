@@ -1,6 +1,10 @@
 
 # SCROLL ZKVM GPU PROVER
 
+## Prerequisite
+
+The minimum required NVIDIA driver is `>=525.60.13`. You can refer to [nvidia drivers](https://www.nvidia.com/en-us/drivers/) to find the driver version for your GPU.
+
 ## How to use the sdk
 
 In the directory `interface/` we have two files:
