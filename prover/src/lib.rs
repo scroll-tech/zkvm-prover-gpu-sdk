@@ -78,3 +78,47 @@ pub extern "C" fn free_proof(proof: *mut c_char) {
         drop(CString::from_raw(proof));
     }
 }
+
+fn get_vk(circuit_type: ProofType) -> *mut c_char {
+    let prover = prover::get_prover().unwrap();
+    match prover.as_ref().get_vk(circuit_type.clone()) {
+        Some(vk) => {
+            if let Ok(vk) = CString::new(vk).and_then(|vk| Ok(vk.into_raw())) {
+                vk as *mut c_char
+            } else {
+                log::error!("failed to copy vk to output buffer");
+                ptr::null::<c_char>() as *mut c_char
+            }
+        }
+        None => {
+            log::error!("failed to get vk for circuit type = {:?}", circuit_type);
+            ptr::null::<c_char>() as *mut c_char
+        }
+    }
+}
+
+#[no_mangle]
+pub unsafe extern "C" fn get_chunk_vk() -> *mut c_char {
+    get_vk(ProofType::Chunk)
+}
+
+#[no_mangle]
+pub unsafe extern "C" fn get_batch_vk() -> *mut c_char {
+    get_vk(ProofType::Batch)
+}
+
+#[no_mangle]
+pub unsafe extern "C" fn get_bundle_vk() -> *mut c_char {
+    get_vk(ProofType::Bundle)
+}
+
+#[no_mangle]
+pub unsafe extern "C" fn free_vk(vk: *mut c_char) {
+    if vk.is_null() {
+        return;
+    }
+    // convert the pointer to a CString and then drop it
+    unsafe {
+        drop(CString::from_raw(vk));
+    }
+}

@@ -19,11 +19,16 @@ func main() {
 	C.init(C.CString(string("assets/")))
 	
 	// chunk test
+	chunk_vk := C.get_chunk_vk()
+	defer C.free_vk(chunk_vk)
+
 	chunk := load_chunk_inputs("testdata/")
 	chunk_input := "[" + strings.Join(chunk, ",") + "]"
 	chunk_proof := C.generate_chunk_proof(C.CString(string(chunk_input)), C.CString("euclid"))
 	defer C.free_proof(chunk_proof)
 	
+	// TODO: add verifier for chunk proof
+
 	// TODO: batch test
 
 	// TODO: bundle test
