@@ -5,7 +5,7 @@ download:
 
 prover:
 	cp ../../interface/* lib/
-	mkdir -p cache
+	mkdir -p assets/cache
 	go build
 
 run:
