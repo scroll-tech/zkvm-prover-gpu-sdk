@@ -1,4 +1,4 @@
-SCROLL_ZKVM_VERSION=0.1.0-rc.8
+export SCROLL_ZKVM_VERSION=0.1.0-rc.8
 
 download:
 	./download.sh
