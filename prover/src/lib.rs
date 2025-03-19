@@ -13,6 +13,7 @@ pub unsafe extern "C" fn init(config: *const c_char) {
     let _ = env_logger::try_init();
     let config_str = c_char_to_str(config);
     prover::init(config_str.to_string());
+    verifier::init(config_str.to_string());
 }
 
 fn generate_proof(input: *const c_char, proof_type: ProofType) -> *mut c_char {
@@ -47,7 +48,6 @@ fn generate_proof(input: *const c_char, proof_type: ProofType) -> *mut c_char {
 #[no_mangle]
 pub unsafe extern "C" fn generate_chunk_proof(
     input: *const c_char,
-    _fork_name: *const c_char,
 ) -> *mut c_char {
     generate_proof(input, ProofType::Chunk)
 }
@@ -55,7 +55,6 @@ pub unsafe extern "C" fn generate_chunk_proof(
 #[no_mangle]
 pub unsafe extern "C" fn generate_batch_proof(
     input: *const c_char,
-    _fork_name: *const c_char,
 ) -> *mut c_char {
     generate_proof(input, ProofType::Batch)
 }
@@ -63,7 +62,6 @@ pub unsafe extern "C" fn generate_batch_proof(
 #[no_mangle]
 pub unsafe extern "C" fn generate_bundle_proof(
     input: *const c_char,
-    _fork_name: *const c_char,
 ) -> *mut c_char {
     generate_proof(input, ProofType::Bundle)
 }

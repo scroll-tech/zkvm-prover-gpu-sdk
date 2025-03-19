@@ -1,9 +1,9 @@
 use std::{cell::OnceCell, rc::Rc};
 
 use anyhow::{anyhow, Result};
-use euclid::EuclidProver;
+use euclid_v2::EuclidProver;
 
-mod euclid;
+mod euclid_v2;
 
 #[derive(Clone, Debug)]
 pub enum ProofType {
