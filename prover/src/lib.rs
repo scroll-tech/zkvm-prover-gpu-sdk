@@ -13,7 +13,6 @@ pub unsafe extern "C" fn init(config: *const c_char) {
     let _ = env_logger::try_init();
     let config_str = c_char_to_str(config);
     prover::init(config_str.to_string());
-    verifier::init(config_str.to_string());
 }
 
 fn generate_proof(input: *const c_char, proof_type: ProofType) -> *mut c_char {
