@@ -35,10 +35,11 @@ func main() {
 
 	// chunk test
 	chunk_input := loadChunkInputs("testdata/")
-	chunk_proof := C.generate_chunk_proof(C.CString(string(chunk_input)), C.CString("euclid"))
+	chunk_proof := C.generate_chunk_proof(C.CString(string(chunk_input)))
 	defer C.free_proof(chunk_proof)
 	go_chunk_proof := C.GoString(chunk_proof)
 	fmt.Println("Chunk proof:", go_chunk_proof)
+	fmt.Println("Succeed to generate chunk proof!")
 	
 	// TODO: add verifier for chunk proof
 
