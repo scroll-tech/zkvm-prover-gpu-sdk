@@ -21,36 +21,39 @@ impl EuclidProver {
         let cache_dir = workspace_path.join("cache");
         let chunk_exe = workspace_path.join("chunk/app.vmexe");
         let chunk_app_config = workspace_path.join("chunk/openvm.toml");
-        let chunk_prover_config = euclid_prover::ProverConfig {
+        let chunk_prover_config = ProverConfig {
             path_app_exe: chunk_exe,
-            path_app_config: chunk_app_config,                   
-            dir_cache: Some(cache_dir.clone()),                    
-            segment_len: Some((1 << 22) - 100), 
-            ..Default::default()                
+            path_app_config: chunk_app_config,
+            dir_cache: Some(cache_dir.clone()),
+            segment_len: Some((1 << 22) - 100),
+            ..Default::default()
         };
-        let chunk_prover = ChunkProver::setup(chunk_prover_config).expect("Failed to setup chunk prover");
+        let chunk_prover =
+            ChunkProver::setup(chunk_prover_config).expect("Failed to setup chunk prover");
 
         let batch_exe = workspace_path.join("batch/app.vmexe");
         let batch_app_config = workspace_path.join("batch/openvm.toml");
-        let batch_prover_config = euclid_prover::ProverConfig {
+        let batch_prover_config = ProverConfig {
             path_app_exe: batch_exe,
-            path_app_config: batch_app_config,                   
-            dir_cache: Some(cache_dir.clone()),                    
-            segment_len: Some((1 << 22) - 100), 
-            ..Default::default()                
+            path_app_config: batch_app_config,
+            dir_cache: Some(cache_dir.clone()),
+            segment_len: Some((1 << 22) - 100),
+            ..Default::default()
         };
-        let batch_prover = BatchProver::setup(batch_prover_config).expect("Failed to setup batch prover");
+        let batch_prover =
+            BatchProver::setup(batch_prover_config).expect("Failed to setup batch prover");
 
         let bundle_exe = workspace_path.join("bundle/app.vmexe");
         let bundle_app_config = workspace_path.join("bundle/openvm.toml");
-        let bundle_prover_config = euclid_prover::ProverConfig {
+        let bundle_prover_config = ProverConfig {
             path_app_exe: bundle_exe,
-            path_app_config: bundle_app_config,                   
-            dir_cache: Some(cache_dir.clone()),                    
-            segment_len: Some((1 << 22) - 100), 
-            ..Default::default()                
+            path_app_config: bundle_app_config,
+            dir_cache: Some(cache_dir.clone()),
+            segment_len: Some((1 << 22) - 100),
+            ..Default::default()
         };
-        let bundle_prover = BundleProver::setup(bundle_prover_config).expect("Failed to setup bundle prover");
+        let bundle_prover =
+            BundleProver::setup(bundle_prover_config).expect("Failed to setup bundle prover");
 
         Self {
             chunk_prover,

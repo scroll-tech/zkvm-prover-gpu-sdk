@@ -45,23 +45,17 @@ fn generate_proof(input: *const c_char, proof_type: ProofType) -> *mut c_char {
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn generate_chunk_proof(
-    input: *const c_char,
-) -> *mut c_char {
+pub unsafe extern "C" fn generate_chunk_proof(input: *const c_char) -> *mut c_char {
     generate_proof(input, ProofType::Chunk)
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn generate_batch_proof(
-    input: *const c_char,
-) -> *mut c_char {
+pub unsafe extern "C" fn generate_batch_proof(input: *const c_char) -> *mut c_char {
     generate_proof(input, ProofType::Batch)
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn generate_bundle_proof(
-    input: *const c_char,
-) -> *mut c_char {
+pub unsafe extern "C" fn generate_bundle_proof(input: *const c_char) -> *mut c_char {
     generate_proof(input, ProofType::Bundle)
 }
 
