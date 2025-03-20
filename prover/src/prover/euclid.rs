@@ -22,9 +22,9 @@ impl EuclidProver {
         let chunk_exe = workspace_path.join("chunk/app.vmexe");
         let chunk_app_config = workspace_path.join("chunk/openvm.toml");
         let chunk_prover_config = euclid_prover::ProverConfig {
-            chunk_exe,
-            chunk_app_config,                   
-            Some(cache_dir.clone()),                    
+            path_app_exe: chunk_exe,
+            path_app_config: chunk_app_config,                   
+            dir_cache: Some(cache_dir.clone()),                    
             segment_len: Some((1 << 22) - 100), 
             ..Default::default()                
         };
@@ -33,9 +33,9 @@ impl EuclidProver {
         let batch_exe = workspace_path.join("batch/app.vmexe");
         let batch_app_config = workspace_path.join("batch/openvm.toml");
         let batch_prover_config = euclid_prover::ProverConfig {
-            batch_exe,
-            batch_app_config,                   
-            Some(cache_dir.clone()),                    
+            path_app_exe: batch_exe,
+            path_app_config: batch_app_config,                   
+            dir_cache: Some(cache_dir.clone()),                    
             segment_len: Some((1 << 22) - 100), 
             ..Default::default()                
         };
@@ -44,9 +44,9 @@ impl EuclidProver {
         let bundle_exe = workspace_path.join("bundle/app.vmexe");
         let bundle_app_config = workspace_path.join("bundle/openvm.toml");
         let bundle_prover_config = euclid_prover::ProverConfig {
-            bundle_exe,
-            bundle_app_config,                   
-            Some(cache_dir.clone()),                    
+            path_app_exe: bundle_exe,
+            path_app_config: bundle_app_config,                   
+            dir_cache: Some(cache_dir.clone()),                    
             segment_len: Some((1 << 22) - 100), 
             ..Default::default()                
         };
