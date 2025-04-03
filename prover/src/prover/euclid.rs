@@ -3,7 +3,7 @@ use std::path::Path;
 use anyhow::Result;
 use euclid_prover::{
     task::{batch::BatchProvingTask, bundle::BundleProvingTask, chunk::ChunkProvingTask},
-    BatchProver, BundleProver, ChunkProver, ProverConfig,
+    BatchProver, BundleProverEuclidV2, ChunkProver, ProverConfig,
 };
 
 use super::ProofType;
@@ -11,7 +11,7 @@ use super::ProofType;
 pub struct EuclidProver {
     chunk_prover: ChunkProver,
     batch_prover: BatchProver,
-    bundle_prover: BundleProver,
+    bundle_prover: BundleProverEuclidV2,
 }
 
 impl EuclidProver {
