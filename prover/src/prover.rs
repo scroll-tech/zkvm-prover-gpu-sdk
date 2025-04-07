@@ -1,14 +1,13 @@
+#[macro_use]
+extern crate lazy_static;
 use std::sync::OnceLock;
 use std::rc::Rc;
-use std::sync::Mutex;
 use std::cell::RefCell;
 
 pub mod euclid;
 #[allow(non_snake_case)]
 pub mod euclidV2;
 
-use anyhow::{anyhow, Result};
-use sbv_primitives::types::revm::handler;
 use crate::zk_circuits_handler::CircuitsHandler;
 
 #[derive(Clone, Debug)]
@@ -18,10 +17,10 @@ pub enum ProofType {
     Bundle,
 }
 
-pub static ACTIVE_HANDLER: RefCell<Option<(String, Rc<dyn CircuitsHandler>)>> = unsafe {
-    std::mem::transmute(RefCell::new(None))
-};
-pub static WORKSPACE_PATH: OnceLock<(&str)> = OnceLock::new();
+lazy_static! {
+    pub static ref ACTIVE_HANDLER: RefCell<Option<(String, Rc<dyn CircuitsHandler>)>> = RefCell::new(None);
+}
+pub static WORKSPACE_PATH: OnceLock<&str> = OnceLock::new();
 
 pub fn init(workspace_path: &'static str) {
     WORKSPACE_PATH.set(workspace_path);

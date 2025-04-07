@@ -5,7 +5,7 @@ use super::euclid::Phase;
 use anyhow::Result;
 use euclid_prover::{
     task::{batch::BatchProvingTask, bundle::BundleProvingTask, chunk::ChunkProvingTask},
-    BatchProver, BundleProverEuclidV2, ChunkProver, ProverConfig,
+    BatchProver, BundleProverEuclidV2, ChunkProver,
 };
 
 use super::ProofType;
