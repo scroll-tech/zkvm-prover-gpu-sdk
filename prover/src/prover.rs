@@ -15,7 +15,7 @@ pub enum ProofType {
     Bundle,
 }
 
-pub static ACTIVE_HANDLER: OnceCell<Option<(String, Rc<dyn CircuitsHandler>)>> = OnceCell::new(None);
+pub static mut ACTIVE_HANDLER: OnceCell<Option<(String, Rc<dyn CircuitsHandler>)>> = OnceCell::new();
 pub static WORKSPACE_PATH: OnceLock<&str> = OnceLock::new();
 
 pub fn init(workspace_path: &'static str) {
@@ -23,8 +23,8 @@ pub fn init(workspace_path: &'static str) {
 }
 
 pub fn set_active_handler(hard_fork_name: &str) {
-    let mut handler = ACTIVE_HANDLER.borrow_mut();
-    if let Some(h) = &*handler {
+    unsafe { let prover = ACTIVE_HANDLER.get(); }
+    if let Some(h) = &*prover {
         if h.0 == hard_fork_name {
             return;
         }
