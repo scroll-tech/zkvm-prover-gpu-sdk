@@ -1,5 +1,6 @@
-mod prover;
-mod utils;
+pub mod prover;
+pub mod zk_circuits_handler;
+pub mod utils;
 
 use prover::ProofType;
 use std::{

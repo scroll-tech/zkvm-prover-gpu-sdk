@@ -1,4 +1,4 @@
-use std::{cell::OnceCell, rc::Rc};
+use std::sync::OnceLock;
 use std::sync::{Arc, RwLock};
 
 pub mod euclid;
@@ -6,7 +6,7 @@ pub mod euclid;
 pub mod euclidV2;
 
 use anyhow::{anyhow, Result};
-use euclidV2::EuclidProver;
+use euclidV2::EuclidV2Prover;
 
 #[derive(Clone, Debug)]
 pub enum ProofType {

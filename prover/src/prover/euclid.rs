@@ -1,5 +1,6 @@
 use std::path::Path;
 
+use super::{euclid::Phase, CircuitsHandler};
 use anyhow::Result;
 use euclid_prover::{
     task::{batch::BatchProvingTask, bundle::BundleProvingTask, chunk::ChunkProvingTask},
