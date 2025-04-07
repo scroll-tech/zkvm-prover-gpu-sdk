@@ -16,14 +16,15 @@ pub unsafe extern "C" fn init(config: *const c_char) {
     prover::init(config_str.to_string());
 }
 
-fn generate_proof(input: *const c_char, proof_type: ProofType, fork_name: String) -> *mut c_char {
-    prover::set_active_handler(fork_name.as_str()).unwrap();
+fn generate_proof(input: *const c_char, proof_type: ProofType, fork_name: *const c_char,) -> *mut c_char {
+    prover::set_active_handler(fork_name.as_str());
     let input_str = c_char_to_str(input).to_string();
+    let fork_name_str = c_char_to_str(fork_name).to_string();
 
     match ACTIVE_HANDLER
         .1
         .as_ref()
-        .get_proof_data(proof_type.clone(), input_str, fork_name)
+        .get_proof_data(proof_type.clone(), input_str, fork_name_str)
     {
         Err(e) => {
             log::error!(
@@ -72,8 +73,9 @@ pub extern "C" fn free_proof(proof: *mut c_char) {
     }
 }
 
-fn get_vk(circuit_type: ProofType, fork_name: String) -> *mut c_char {
-    prover::set_active_handler(fork_name.as_str()).unwrap();
+fn get_vk(circuit_type: ProofType, fork_name: *const c_char) -> *mut c_char {
+    let fork_name_str = c_char_to_str(fork_name);
+    prover::set_active_handler(fork_name_str);
 
     match ACTIVE_HANDLER.1.as_ref().get_vk(circuit_type.clone()) {
         Some(vk) => {

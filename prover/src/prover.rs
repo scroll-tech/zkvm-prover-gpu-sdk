@@ -19,11 +19,11 @@ static ACTIVE_HANDLER: RwLock<Option<(String, Arc<dyn CircuitsHandler>)>> = RwLo
 static WORKSPACE_PATH: OnceLock<(String)> = OnceLock::new();
 
 pub fn init(workspace_path: String) {
-    WORKSPACE_PATH.set(workspace_path)
+    WORKSPACE_PATH.set(workspace_path);
 }
 
 pub fn set_active_handler(hard_fork_name: &str) {
-    let mut handler = ACTIVE_HANDLER.write().unwrap(); // 获取写锁
+    let mut handler = ACTIVE_HANDLER.write().unwrap();
     if let Some((name, _)) = &*handler {
         if name == hard_fork_name {
             return;
@@ -33,16 +33,18 @@ pub fn set_active_handler(hard_fork_name: &str) {
 }
 
 fn new_handler(hard_fork_name: &str) -> Arc<dyn CircuitsHandler> {
-    if WORKSPACE_PATH.get().is_none() {
-        println!("WORKSPACE_PATH not initialized yet!");
-    }
+    // Get the workspace path or return early if not initialized
+    let workspace_path = WORKSPACE_PATH.get().ok_or_else(|| {
+        panic!("WORKSPACE_PATH not initialized!");
+    })?;
+
     match hard_fork_name {
-        "euclid" => Arc::new(Arc::new(Mutex::new(euclid::EuclidProver::new(
-            WORKSPACE_PATH,
-        )))) as Arc<dyn CircuitsHandler>,
-        "euclidV2" => Arc::new(Arc::new(Mutex::new(euclidV2::EuclidV2Prover::new(
-            WORKSPACE_PATH,
-        )))) as Arc<dyn CircuitsHandler>,
-        _ => unreachable!(),
+        "euclid" => Arc::new(Mutex::new(euclid::EuclidProver::new(
+            workspace_path.as_str(),
+        ))) as Arc<dyn CircuitsHandler>,
+        "euclidV2" => Arc::new(Mutex::new(euclidV2::EuclidV2Prover::new(
+            workspace_path.as_str(),
+        ))) as Arc<dyn CircuitsHandler>,
+        _ => unreachable!("Wrong hard fork name"),
     }
 }

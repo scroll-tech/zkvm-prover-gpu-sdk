@@ -43,7 +43,6 @@ impl CircuitsHandler for EuclidV2Prover {
             ProofType::Chunk => self.chunk_prover.get_app_vk(),
             ProofType::Batch => self.batch_prover.get_app_vk(),
             ProofType::Bundle => self.bundle_prover.get_app_vk(),
-            _ => unreachable!("Unsupported proof type"),
         })
     }
 
