@@ -20,37 +20,38 @@ fn generate_proof(input: *const c_char, proof_type: ProofType, fork_name: *const
     let input_str = c_char_to_str(input).to_string();
     let fork_name_str = c_char_to_str(fork_name);
     prover::set_active_handler(fork_name_str);
-    unsafe { let prover = ACTIVE_HANDLER.get(); }
-
-    if let Some(h) = &*prover {
-        match h
-            .1
-            .as_ref()
-            .get_proof_data(proof_type.clone(), input_str, fork_name_str.to_string())
-        {
-            Err(e) => {
-                log::error!(
-                    "failed to generate proof for type = {:?}, error = {}",
-                    proof_type,
-                    e
-                );
-                ptr::null::<c_char>() as *mut c_char
-            }
-            Ok(proof_data) => {
-                if let Ok(proof_data) =
-                    CString::new(proof_data).and_then(|proof_data| Ok(proof_data.into_raw()))
-                {
-                    proof_data as *mut c_char
-                } else {
-                    log::error!("failed to copy proof data to output buffer");
+    unsafe { 
+        let prover = ACTIVE_HANDLER.get(); 
+    
+        if let Some(h) = &*prover {
+            match h
+                .1
+                .as_ref()
+                .get_proof_data(proof_type.clone(), input_str, fork_name_str.to_string())
+            {
+                Err(e) => {
+                    log::error!(
+                        "failed to generate proof for type = {:?}, error = {}",
+                        proof_type,
+                        e
+                    );
                     ptr::null::<c_char>() as *mut c_char
                 }
+                Ok(proof_data) => {
+                    if let Ok(proof_data) =
+                        CString::new(proof_data).and_then(|proof_data| Ok(proof_data.into_raw()))
+                    {
+                        proof_data as *mut c_char
+                    } else {
+                        log::error!("failed to copy proof data to output buffer");
+                        ptr::null::<c_char>() as *mut c_char
+                    }
+                }
             }
+        } else {
+            panic!("Failed to generate proof, handler not initialized")
         }
-    } else {
-        panic!("Failed to generate proof, handler not initialized")
     }
-    
 }
 
 #[no_mangle]
@@ -82,25 +83,27 @@ pub extern "C" fn free_proof(proof: *mut c_char) {
 fn get_vk(circuit_type: ProofType, fork_name: *const c_char) -> *mut c_char {
     let fork_name_str = c_char_to_str(fork_name);
     prover::set_active_handler(fork_name_str);
-    unsafe { let prover = ACTIVE_HANDLER.get(); }
+    unsafe { 
+        let handler = ACTIVE_HANDLER.get();
 
-    if let Some(h) = &*prover {
-        match h.1.as_ref().get_vk(circuit_type.clone()) {
-            Some(vk) => {
-                if let Ok(vk) = CString::new(base64::encode(vk)).and_then(|vk| Ok(vk.into_raw())) {
-                    vk as *mut c_char
-                } else {
-                    log::error!("failed to copy vk to output buffer");
+        if let Some(h) = &*handler {
+            match h.1.as_ref().get_vk(circuit_type.clone()) {
+                Some(vk) => {
+                    if let Ok(vk) = CString::new(base64::encode(vk)).and_then(|vk| Ok(vk.into_raw())) {
+                        vk as *mut c_char
+                    } else {
+                        log::error!("failed to copy vk to output buffer");
+                        ptr::null::<c_char>() as *mut c_char
+                    }
+                }
+                None => {
+                    log::error!("failed to get vk for circuit type = {:?}", circuit_type);
                     ptr::null::<c_char>() as *mut c_char
                 }
             }
-            None => {
-                log::error!("failed to get vk for circuit type = {:?}", circuit_type);
-                ptr::null::<c_char>() as *mut c_char
-            }
+        } else {
+            panic!("Failed to get vk, handler not initialized")
         }
-    } else {
-        panic!("Failed to get vk, handler not initialized")
     }
 }
 

@@ -23,13 +23,15 @@ pub fn init(workspace_path: &'static str) {
 }
 
 pub fn set_active_handler(hard_fork_name: &str) {
-    unsafe { let prover = ACTIVE_HANDLER.get(); }
-    if let Some(h) = &*prover {
-        if h.0 == hard_fork_name {
-            return;
+    unsafe { 
+        let handler = ACTIVE_HANDLER.get(); 
+        if let Some(h) = &*handler {
+            if h.0 == hard_fork_name {
+                return;
+            }
         }
+        *handler = Some((hard_fork_name.to_string(), new_handler(hard_fork_name)));
     }
-    *handler = Some((hard_fork_name.to_string(), new_handler(hard_fork_name)));
 }
 
 fn new_handler(hard_fork_name: &str) -> Rc<dyn CircuitsHandler> {
