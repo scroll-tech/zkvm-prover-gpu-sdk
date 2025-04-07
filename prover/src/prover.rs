@@ -1,5 +1,3 @@
-#[macro_use]
-extern crate lazy_static;
 use std::sync::OnceLock;
 use std::rc::Rc;
 use std::cell::RefCell;
@@ -18,7 +16,7 @@ pub enum ProofType {
 }
 
 lazy_static! {
-    pubstatic ref ACTIVE_HANDLER: RefCell<Option<(String, Rc<dyn CircuitsHandler>)>> = RefCell::new(None);
+    pub static ref ACTIVE_HANDLER: RefCell<Option<(String, Rc<dyn CircuitsHandler>)>> = RefCell::new(None);
 }
 pub static WORKSPACE_PATH: OnceLock<&str> = OnceLock::new();
 

@@ -1,3 +1,5 @@
+#[macro_use]
+extern crate lazy_static;
 pub mod prover;
 pub mod zk_circuits_handler;
 pub mod utils;
