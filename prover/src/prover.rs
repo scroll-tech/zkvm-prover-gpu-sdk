@@ -6,7 +6,7 @@ pub mod euclid;
 pub mod euclidV2;
 
 use anyhow::{anyhow, Result};
-use euclidV2::EuclidV2Prover;
+use crate::zk_circuits_handler::CircuitsHandler;
 
 #[derive(Clone, Debug)]
 pub enum ProofType {
@@ -16,7 +16,7 @@ pub enum ProofType {
 }
 
 static ACTIVE_HANDLER: RwLock<Option<(String, Arc<dyn CircuitsHandler>)>> = RwLock::new(None);
-static WORKSPACE_PATH: OnceCell<(String)> = OnceCell::new();
+static WORKSPACE_PATH: OnceLock<(String)> = OnceLock::new();
 
 pub fn init(workspace_path: String) {
     WORKSPACE_PATH.set(workspace_path)

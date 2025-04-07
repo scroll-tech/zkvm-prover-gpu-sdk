@@ -92,17 +92,17 @@ fn get_vk(circuit_type: ProofType, fork_name: String) -> *mut c_char {
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn get_chunk_vk() -> *mut c_char {
+pub unsafe extern "C" fn get_chunk_vk(fork_name: *const c_char) -> *mut c_char {
     get_vk(ProofType::Chunk, fork_name)
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn get_batch_vk() -> *mut c_char {
+pub unsafe extern "C" fn get_batch_vk(fork_name: *const c_char) -> *mut c_char {
     get_vk(ProofType::Batch, fork_name)
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn get_bundle_vk() -> *mut c_char {
+pub unsafe extern "C" fn get_bundle_vk(fork_name: *const c_char) -> *mut c_char {
     get_vk(ProofType::Bundle, fork_name)
 }
 
