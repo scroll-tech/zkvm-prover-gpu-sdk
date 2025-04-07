@@ -18,11 +18,13 @@ pub enum ProofType {
     Bundle,
 }
 
-pub static ACTIVE_HANDLER: RefCell<Option<(String, Rc<dyn CircuitsHandler>)>> = RefCell::new(None);
+pub static ACTIVE_HANDLER: RefCell<Option<(String, Rc<dyn CircuitsHandler>)>> = unsafe {
+    std::mem::transmute(RefCell::new(None))
+};
 pub static WORKSPACE_PATH: OnceLock<(&str)> = OnceLock::new();
 
 pub fn init(workspace_path: &'static str) {
-    WORKSPACE_PATH.set(workspace_path);xa
+    WORKSPACE_PATH.set(workspace_path);
 }
 
 pub fn set_active_handler(hard_fork_name: &str) {
