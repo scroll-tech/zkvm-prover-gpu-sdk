@@ -39,7 +39,7 @@ fn new_handler(hard_fork_name: &str) -> Arc<dyn CircuitsHandler> {
     });
 
     match workspace_path {
-        Some(wp) => {
+        Ok(wp) => {
             match hard_fork_name {
                 "euclid" => Arc::new(Mutex::new(euclid::EuclidProver::new(
                     wp,
