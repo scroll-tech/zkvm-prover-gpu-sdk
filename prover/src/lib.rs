@@ -2,7 +2,7 @@ pub mod prover;
 pub mod zk_circuits_handler;
 pub mod utils;
 
-use prover::ProofType;
+use prover::{ProofType, ACTIVE_HANDLER};
 use std::{
     ffi::{c_char, CString},
     ptr,

@@ -1,6 +1,5 @@
 use anyhow::Result;
-use async_trait::async_trait;
-use prover::ProofType;
+use crate::prover::ProofType;
 
 pub trait CircuitsHandler {
     fn get_vk(&self, task_type: ProofType) -> Option<Vec<u8>>;

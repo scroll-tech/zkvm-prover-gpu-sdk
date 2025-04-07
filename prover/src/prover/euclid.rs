@@ -1,7 +1,6 @@
 use std::path::Path;
 
 use crate::zk_circuits_handler::CircuitsHandler;
-use super::euclid::Phase;
 use anyhow::Result;
 use euclid_prover::{
     task::{batch::BatchProvingTask, bundle::BundleProvingTask, chunk::ChunkProvingTask},

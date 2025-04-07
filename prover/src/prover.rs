@@ -1,5 +1,5 @@
 use std::sync::OnceLock;
-use std::sync::{Arc, RwLock};
+use std::sync::{Rc, RwLock};
 
 pub mod euclid;
 #[allow(non_snake_case)]
@@ -15,8 +15,8 @@ pub enum ProofType {
     Bundle,
 }
 
-static ACTIVE_HANDLER: RwLock<Option<(String, Arc<dyn CircuitsHandler>)>> = RwLock::new(None);
-static WORKSPACE_PATH: OnceLock<(&str)> = OnceLock::new();
+pub static ACTIVE_HANDLER: RwLock<Option<(String, Rc<dyn CircuitsHandler>)>> = RwLock::new(None);
+pub static WORKSPACE_PATH: OnceLock<(&str)> = OnceLock::new();
 
 pub fn init(workspace_path: &'static str) {
     WORKSPACE_PATH.set(workspace_path);
@@ -41,12 +41,12 @@ fn new_handler(hard_fork_name: &str) -> Arc<dyn CircuitsHandler> {
     match workspace_path {
         Ok(wp) => {
             match hard_fork_name {
-                "euclid" => Arc::new(Mutex::new(euclid::EuclidProver::new(
+                "euclid" => Rc::new(Mutex::new(euclid::EuclidProver::new(
                     wp,
-                ))) as Arc<dyn CircuitsHandler>,
-                "euclidV2" => Arc::new(Mutex::new(euclidV2::EuclidV2Prover::new(
+                ))) as Rc<dyn CircuitsHandler>,
+                "euclidV2" => Rc::new(Mutex::new(euclidV2::EuclidV2Prover::new(
                     wp,
-                ))) as Arc<dyn CircuitsHandler>,
+                ))) as Rc<dyn CircuitsHandler>,
                 _ => unreachable!("Wrong hard fork name"),
             }
         },
