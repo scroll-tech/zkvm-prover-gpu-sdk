@@ -7726,6 +7726,7 @@ dependencies = [
  "base64 0.13.1",
  "env_logger",
  "log",
+ "once_cell",
  "sbv-primitives",
  "scroll-zkvm-prover",
  "serde",
