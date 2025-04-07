@@ -22,10 +22,10 @@ fn generate_proof(input: *const c_char, proof_type: ProofType, fork_name: *const
     prover::set_active_handler(fork_name_str);
 
     match ACTIVE_HANDLER
-        .borrow()
+        .borrow()?
         .1
         .as_ref()
-        .get_proof_data(proof_type.clone(), input_str, fork_name_str)
+        .get_proof_data(proof_type.clone(), input_str, fork_name_str.to_string())
     {
         Err(e) => {
             log::error!(

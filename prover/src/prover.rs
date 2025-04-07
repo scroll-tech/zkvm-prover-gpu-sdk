@@ -17,7 +17,7 @@ pub enum ProofType {
     Bundle,
 }
 
-pub static ACTIVE_HANDLER: RefCell<(String, Rc<dyn CircuitsHandler>)> = RefCell::new(None);
+pub static ACTIVE_HANDLER: RefCell<Option<(String, Rc<dyn CircuitsHandler>)>> = RefCell::new(None);
 pub static WORKSPACE_PATH: OnceLock<(&str)> = OnceLock::new();
 
 pub fn init(workspace_path: &'static str) {
@@ -25,7 +25,7 @@ pub fn init(workspace_path: &'static str) {
 }
 
 pub fn set_active_handler(hard_fork_name: &str) {
-    let mut handler = ACTIVE_HANDLER.borrow_mut().unwrap();
+    let mut handler = ACTIVE_HANDLER.borrow_mut();
     if let (name, _) = &*handler {
         if name == hard_fork_name {
             return;
