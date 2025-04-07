@@ -42,10 +42,10 @@ fn new_handler(hard_fork_name: &str) -> Arc<dyn CircuitsHandler> {
         Some(wp) => {
             match hard_fork_name {
                 "euclid" => Arc::new(Mutex::new(euclid::EuclidProver::new(
-                    workspace_path.expect("Failed to get workspace path"),
+                    wp,
                 ))) as Arc<dyn CircuitsHandler>,
                 "euclidV2" => Arc::new(Mutex::new(euclidV2::EuclidV2Prover::new(
-                    workspace_path.expect("Failed to get workspace path")?,
+                    wp,
                 ))) as Arc<dyn CircuitsHandler>,
                 _ => unreachable!("Wrong hard fork name"),
             }
