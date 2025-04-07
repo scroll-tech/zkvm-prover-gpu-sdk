@@ -13,7 +13,7 @@ use utils::c_char_to_str;
 pub unsafe extern "C" fn init(config: *const c_char) {
     let _ = env_logger::try_init();
     let config_str = c_char_to_str(config);
-    prover::init(config_str.to_string());
+    prover::init(config_str);
 }
 
 fn generate_proof(input: *const c_char, proof_type: ProofType, fork_name: *const c_char,) -> *mut c_char {
