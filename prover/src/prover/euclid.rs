@@ -3,57 +3,94 @@ use std::path::Path;
 use anyhow::Result;
 use euclid_prover::{
     task::{batch::BatchProvingTask, bundle::BundleProvingTask, chunk::ChunkProvingTask},
-    BatchProver, BundleProverEuclidV2, ChunkProver, ProverConfig,
+    BatchProver, BundleProverEuclidV1, ChunkProver, ProverConfig,
 };
 
 use super::ProofType;
 
+#[derive(Clone, Copy)]
+pub(crate) enum Phase {
+    EuclidV1,
+    EuclidV2,
+}
+
+impl Phase {
+    pub fn as_str(&self) -> &str {
+        match self {
+            Phase::EuclidV1 => "euclidv1",
+            Phase::EuclidV2 => "euclidv2",
+        }
+    }
+
+    pub fn phase_spec_chunk(&self, workspace_path: &Path) -> ProverConfig {
+        let dir_cache = Some(workspace_path.join("cache"));
+        let path_app_exe = workspace_path.join("chunk/app.vmexe");
+        let path_app_config = workspace_path.join("chunk/openvm.toml");
+        let segment_len = Some((1 << 22) - 100);
+        ProverConfig {
+            dir_cache,
+            path_app_config,
+            path_app_exe,
+            segment_len,
+            ..Default::default()
+        }
+    }
+
+    pub fn phase_spec_batch(&self, workspace_path: &Path) -> ProverConfig {
+        let dir_cache = Some(workspace_path.join("cache"));
+        let path_app_exe = workspace_path.join("batch/app.vmexe");
+        let path_app_config = workspace_path.join("batch/openvm.toml");
+        let segment_len = Some((1 << 22) - 100);
+        ProverConfig {
+            dir_cache,
+            path_app_config,
+            path_app_exe,
+            segment_len,
+            ..Default::default()
+        }
+    }
+
+    pub fn phase_spec_bundle(&self, workspace_path: &Path) -> ProverConfig {
+        let dir_cache = Some(workspace_path.join("cache"));
+        let path_app_config = workspace_path.join("bundle/openvm.toml");
+        let segment_len = Some((1 << 22) - 100);
+        match self {
+            Phase::EuclidV1 => ProverConfig {
+                dir_cache,
+                path_app_config,
+                segment_len,
+                path_app_exe: workspace_path.join("bundle/app_euclidv1.vmexe"),
+                ..Default::default()
+            },
+            Phase::EuclidV2 => ProverConfig {
+                dir_cache,
+                path_app_config,
+                segment_len,
+                path_app_exe: workspace_path.join("bundle/app.vmexe"),
+                ..Default::default()
+            },
+        }
+    }
+}
+
 pub struct EuclidProver {
     chunk_prover: ChunkProver,
     batch_prover: BatchProver,
-    bundle_prover: BundleProverEuclidV2,
+    bundle_prover: BundleProverEuclidV1,
 }
 
 impl EuclidProver {
     pub fn new(workspace_path: &str) -> Self {
+        let p = Phase::EuclidV1;
         let workspace_path = Path::new(workspace_path);
+        let chunk_prover = ChunkProver::setup(p.phase_spec_chunk(workspace_path))
+            .expect("Failed to setup chunk prover");
 
-        let cache_dir = workspace_path.join("cache");
-        let chunk_exe = workspace_path.join("chunk/app.vmexe");
-        let chunk_app_config = workspace_path.join("chunk/openvm.toml");
-        let chunk_prover_config = ProverConfig {
-            path_app_exe: chunk_exe,
-            path_app_config: chunk_app_config,
-            dir_cache: Some(cache_dir.clone()),
-            segment_len: Some((1 << 22) - 100),
-            ..Default::default()
-        };
-        let chunk_prover =
-            ChunkProver::setup(chunk_prover_config).expect("Failed to setup chunk prover");
+        let batch_prover = BatchProver::setup(p.phase_spec_batch(workspace_path))
+            .expect("Failed to setup batch prover");
 
-        let batch_exe = workspace_path.join("batch/app.vmexe");
-        let batch_app_config = workspace_path.join("batch/openvm.toml");
-        let batch_prover_config = ProverConfig {
-            path_app_exe: batch_exe,
-            path_app_config: batch_app_config,
-            dir_cache: Some(cache_dir.clone()),
-            segment_len: Some((1 << 22) - 100),
-            ..Default::default()
-        };
-        let batch_prover =
-            BatchProver::setup(batch_prover_config).expect("Failed to setup batch prover");
-
-        let bundle_exe = workspace_path.join("bundle/app.vmexe");
-        let bundle_app_config = workspace_path.join("bundle/openvm.toml");
-        let bundle_prover_config = ProverConfig {
-            path_app_exe: bundle_exe,
-            path_app_config: bundle_app_config,
-            dir_cache: Some(cache_dir.clone()),
-            segment_len: Some((1 << 22) - 100),
-            ..Default::default()
-        };
-        let bundle_prover =
-            BundleProver::setup(bundle_prover_config).expect("Failed to setup bundle prover");
+        let bundle_prover = BundleProverEuclidV1::setup(p.phase_spec_bundle(workspace_path))
+            .expect("Failed to setup bundle prover");
 
         Self {
             chunk_prover,
@@ -61,17 +98,20 @@ impl EuclidProver {
             bundle_prover,
         }
     }
+}
 
+impl CircuitsHandler for EuclidProver {
     #[allow(dead_code)]
-    pub fn get_vk(&self, task_type: ProofType) -> Option<Vec<u8>> {
+    fn get_vk(&self, task_type: ProofType) -> Option<Vec<u8>> {
         Some(match task_type {
             ProofType::Chunk => self.chunk_prover.get_app_vk(),
             ProofType::Batch => self.batch_prover.get_app_vk(),
             ProofType::Bundle => self.bundle_prover.get_app_vk(),
+            _ => unreachable!("Unsupported proof type"),
         })
     }
 
-    pub fn get_proof_data(&self, proof_type: ProofType, input: String) -> Result<String> {
+    fn get_proof_data(&self, proof_type: ProofType, input: String, fork_name: String) -> Result<String> {
         match proof_type {
             ProofType::Chunk => {
                 let witnesses: Vec<sbv_primitives::types::BlockWitness> =
@@ -80,6 +120,7 @@ impl EuclidProver {
                 let proof = self.chunk_prover.gen_proof(&ChunkProvingTask {
                     block_witnesses: witnesses,
                     prev_msg_queue_hash: Default::default(),
+                    fork_name,
                 })?;
 
                 Ok(serde_json::to_string(&proof)?)
