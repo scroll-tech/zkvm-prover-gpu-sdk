@@ -17,7 +17,7 @@ pub enum ProofType {
     Bundle,
 }
 
-pub static ACTIVE_HANDLER: RefCell<Option<(String, Rc<dyn CircuitsHandler>)>> = RefCell::new(None);
+pub static ACTIVE_HANDLER: RefCell<(String, Rc<dyn CircuitsHandler>)> = RefCell::new(None);
 pub static WORKSPACE_PATH: OnceLock<(&str)> = OnceLock::new();
 
 pub fn init(workspace_path: &'static str) {
@@ -25,8 +25,8 @@ pub fn init(workspace_path: &'static str) {
 }
 
 pub fn set_active_handler(hard_fork_name: &str) {
-    let mut handler = ACTIVE_HANDLER.write().unwrap();
-    if let Some((name, _)) = &*handler {
+    let mut handler = ACTIVE_HANDLER.borrow_mut().unwrap();
+    if let (name, _) = &*handler {
         if name == hard_fork_name {
             return;
         }
@@ -43,12 +43,12 @@ fn new_handler(hard_fork_name: &str) -> Rc<dyn CircuitsHandler> {
     match workspace_path {
         Ok(wp) => {
             match hard_fork_name {
-                "euclid" => Rc::new(Mutex::new(euclid::EuclidProver::new(
+                "euclid" => Rc::new(euclid::EuclidProver::new(
                     wp,
-                ))) as Rc<dyn CircuitsHandler>,
-                "euclidV2" => Rc::new(Mutex::new(euclidV2::EuclidV2Prover::new(
+                )) as Rc<dyn CircuitsHandler>,
+                "euclidV2" => Rc::new(euclidV2::EuclidV2Prover::new(
                     wp,
-                ))) as Rc<dyn CircuitsHandler>,
+                )) as Rc<dyn CircuitsHandler>,
                 _ => unreachable!("Wrong hard fork name"),
             }
         },

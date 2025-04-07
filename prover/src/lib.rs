@@ -22,6 +22,7 @@ fn generate_proof(input: *const c_char, proof_type: ProofType, fork_name: *const
     prover::set_active_handler(fork_name_str);
 
     match ACTIVE_HANDLER
+        .borrow()
         .1
         .as_ref()
         .get_proof_data(proof_type.clone(), input_str, fork_name_str)
@@ -77,7 +78,7 @@ fn get_vk(circuit_type: ProofType, fork_name: *const c_char) -> *mut c_char {
     let fork_name_str = c_char_to_str(fork_name);
     prover::set_active_handler(fork_name_str);
 
-    match ACTIVE_HANDLER.1.as_ref().get_vk(circuit_type.clone()) {
+    match ACTIVE_HANDLER.borrow().1.as_ref().get_vk(circuit_type.clone()) {
         Some(vk) => {
             if let Ok(vk) = CString::new(base64::encode(vk)).and_then(|vk| Ok(vk.into_raw())) {
                 vk as *mut c_char
