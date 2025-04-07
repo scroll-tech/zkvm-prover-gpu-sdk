@@ -17,9 +17,9 @@ pub unsafe extern "C" fn init(config: *const c_char) {
 }
 
 fn generate_proof(input: *const c_char, proof_type: ProofType, fork_name: *const c_char,) -> *mut c_char {
-    prover::set_active_handler(fork_name.as_str());
     let input_str = c_char_to_str(input).to_string();
-    let fork_name_str = c_char_to_str(fork_name).to_string();
+    let fork_name_str = c_char_to_str(fork_name);
+    prover::set_active_handler(fork_name_str);
 
     match ACTIVE_HANDLER
         .1

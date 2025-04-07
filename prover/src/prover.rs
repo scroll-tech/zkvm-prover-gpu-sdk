@@ -36,7 +36,7 @@ fn new_handler(hard_fork_name: &str) -> Arc<dyn CircuitsHandler> {
     // Get the workspace path or return early if not initialized
     let workspace_path = WORKSPACE_PATH.get().ok_or_else(|| {
         panic!("WORKSPACE_PATH not initialized!");
-    })?;
+    });
 
     match hard_fork_name {
         "euclid" => Arc::new(Mutex::new(euclid::EuclidProver::new(
