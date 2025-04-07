@@ -18,7 +18,7 @@ pub enum ProofType {
 static ACTIVE_HANDLER: RwLock<Option<(String, Arc<dyn CircuitsHandler>)>> = RwLock::new(None);
 static WORKSPACE_PATH: OnceLock<(&str)> = OnceLock::new();
 
-pub fn init(workspace_path: &str) {
+pub fn init(workspace_path: &'static str) {
     WORKSPACE_PATH.set(workspace_path);
 }
 
@@ -38,13 +38,19 @@ fn new_handler(hard_fork_name: &str) -> Arc<dyn CircuitsHandler> {
         panic!("WORKSPACE_PATH not initialized!");
     });
 
-    match hard_fork_name {
-        "euclid" => Arc::new(Mutex::new(euclid::EuclidProver::new(
-            workspace_path.expect("Failed to get workspace path"),
-        ))) as Arc<dyn CircuitsHandler>,
-        "euclidV2" => Arc::new(Mutex::new(euclidV2::EuclidV2Prover::new(
-            workspace_path.expect("Failed to get workspace path")?,
-        ))) as Arc<dyn CircuitsHandler>,
-        _ => unreachable!("Wrong hard fork name"),
+    match workspace_path {
+        Some(wp) => {
+            match hard_fork_name {
+                "euclid" => Arc::new(Mutex::new(euclid::EuclidProver::new(
+                    workspace_path.expect("Failed to get workspace path"),
+                ))) as Arc<dyn CircuitsHandler>,
+                "euclidV2" => Arc::new(Mutex::new(euclidV2::EuclidV2Prover::new(
+                    workspace_path.expect("Failed to get workspace path")?,
+                ))) as Arc<dyn CircuitsHandler>,
+                _ => unreachable!("Wrong hard fork name"),
+            }
+        },
+        _ => unreachable!("WORKSPACE_PATH not set"),
     }
+    
 }
