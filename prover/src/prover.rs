@@ -1,5 +1,6 @@
 use std::sync::OnceLock;
-use std::sync::{Rc, Mutex};
+use std::rc::Rc;
+use std::sync::Mutex;
 use std::cell::RefCell;
 
 pub mod euclid;
