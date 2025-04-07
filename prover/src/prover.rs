@@ -8,6 +8,7 @@ pub mod euclid;
 pub mod euclidV2;
 
 use anyhow::{anyhow, Result};
+use sbv_primitives::types::revm::handler;
 use crate::zk_circuits_handler::CircuitsHandler;
 
 #[derive(Clone, Debug)]
@@ -21,13 +22,13 @@ pub static ACTIVE_HANDLER: RefCell<Option<(String, Rc<dyn CircuitsHandler>)>> = 
 pub static WORKSPACE_PATH: OnceLock<(&str)> = OnceLock::new();
 
 pub fn init(workspace_path: &'static str) {
-    WORKSPACE_PATH.set(workspace_path);
+    WORKSPACE_PATH.set(workspace_path);xa
 }
 
 pub fn set_active_handler(hard_fork_name: &str) {
     let mut handler = ACTIVE_HANDLER.borrow_mut();
-    if let (name, _) = &*handler {
-        if name == hard_fork_name {
+    if let Some(h) = &*handler {
+        if h.0 == hard_fork_name {
             return;
         }
     }
