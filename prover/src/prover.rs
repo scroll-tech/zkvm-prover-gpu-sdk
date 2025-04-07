@@ -18,7 +18,7 @@ pub enum ProofType {
 }
 
 lazy_static! {
-    pub static ref ACTIVE_HANDLER: RefCell<Option<(String, Rc<dyn CircuitsHandler>)>> = RefCell::new(None);
+    pubstatic ref ACTIVE_HANDLER: RefCell<Option<(String, Rc<dyn CircuitsHandler>)>> = RefCell::new(None);
 }
 pub static WORKSPACE_PATH: OnceLock<&str> = OnceLock::new();
 
