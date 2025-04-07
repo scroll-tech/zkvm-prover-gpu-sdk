@@ -1,5 +1,6 @@
 use std::sync::OnceLock;
-use std::sync::{Rc, RwLock};
+use std::sync::{Rc, Mutex};
+use std::cell::RefCell;
 
 pub mod euclid;
 #[allow(non_snake_case)]
@@ -15,7 +16,7 @@ pub enum ProofType {
     Bundle,
 }
 
-pub static ACTIVE_HANDLER: RwLock<Option<(String, Rc<dyn CircuitsHandler>)>> = RwLock::new(None);
+pub static ACTIVE_HANDLER: RefCell<Option<(String, Rc<dyn CircuitsHandler>)>> = RefCell::new(None);
 pub static WORKSPACE_PATH: OnceLock<(&str)> = OnceLock::new();
 
 pub fn init(workspace_path: &'static str) {
