@@ -33,7 +33,7 @@ pub fn set_active_handler(hard_fork_name: &str) {
     *handler = Some((hard_fork_name.to_string(), new_handler(hard_fork_name)));
 }
 
-fn new_handler(hard_fork_name: &str) -> Arc<dyn CircuitsHandler> {
+fn new_handler(hard_fork_name: &str) -> Rc<dyn CircuitsHandler> {
     // Get the workspace path or return early if not initialized
     let workspace_path = WORKSPACE_PATH.get().ok_or_else(|| {
         panic!("WORKSPACE_PATH not initialized!");
