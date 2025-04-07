@@ -1,6 +1,6 @@
 use std::sync::OnceLock;
 use std::rc::Rc;
-use std::cell::RefCell;
+use once_cell::unsync::OnceCell;
 
 pub mod euclid;
 #[allow(non_snake_case)]
@@ -15,9 +15,7 @@ pub enum ProofType {
     Bundle,
 }
 
-lazy_static! {
-    pub static ref ACTIVE_HANDLER: RefCell<Option<(String, Rc<dyn CircuitsHandler>)>> = RefCell::new(None);
-}
+pub static ACTIVE_HANDLER: OnceCell<Option<(String, Rc<dyn CircuitsHandler>)>> = OnceCell::new(None);
 pub static WORKSPACE_PATH: OnceLock<&str> = OnceLock::new();
 
 pub fn init(workspace_path: &'static str) {

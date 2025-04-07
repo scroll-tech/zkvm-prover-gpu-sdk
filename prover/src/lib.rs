@@ -1,5 +1,3 @@
-#[macro_use]
-extern crate lazy_static;
 pub mod prover;
 pub mod zk_circuits_handler;
 pub mod utils;
@@ -22,7 +20,7 @@ fn generate_proof(input: *const c_char, proof_type: ProofType, fork_name: *const
     let input_str = c_char_to_str(input).to_string();
     let fork_name_str = c_char_to_str(fork_name);
     prover::set_active_handler(fork_name_str);
-    let prover = ACTIVE_HANDLER.borrow();
+    unsafe { let prover = ACTIVE_HANDLER.get(); }
 
     if let Some(h) = &*prover {
         match h
@@ -84,7 +82,7 @@ pub extern "C" fn free_proof(proof: *mut c_char) {
 fn get_vk(circuit_type: ProofType, fork_name: *const c_char) -> *mut c_char {
     let fork_name_str = c_char_to_str(fork_name);
     prover::set_active_handler(fork_name_str);
-    let prover = ACTIVE_HANDLER.borrow();
+    unsafe { let prover = ACTIVE_HANDLER.get(); }
 
     if let Some(h) = &*prover {
         match h.1.as_ref().get_vk(circuit_type.clone()) {

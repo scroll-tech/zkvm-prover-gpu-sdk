@@ -7725,7 +7725,6 @@ dependencies = [
  "anyhow",
  "base64 0.13.1",
  "env_logger",
- "lazy_static",
  "log",
  "sbv-primitives",
  "scroll-zkvm-prover",
