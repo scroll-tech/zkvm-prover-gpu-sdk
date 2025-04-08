@@ -5,6 +5,7 @@ use euclid_prover::{
     task::{batch::BatchProvingTask, bundle::BundleProvingTask, chunk::ChunkProvingTask},
     BatchProver, BundleProverEuclidV2, ChunkProver, ProverConfig,
 };
+use log::info;
 
 use super::ProofType;
 
@@ -81,11 +82,10 @@ impl EuclidProver {
             ProofType::Chunk => {
                 let witnesses: Vec<sbv_primitives::types::BlockWitness> =
                     serde_json::from_str(&input)?;
-
                 let proof = self.chunk_prover.gen_proof(&ChunkProvingTask {
                     block_witnesses: witnesses,
                     prev_msg_queue_hash: Default::default(),
-                    fork_name,
+                    fork_name: Default::default(),
                 })?;
 
                 Ok(serde_json::to_string(&proof)?)
