@@ -24,8 +24,8 @@ pub fn init(workspace_path: &'static str) {
 
 pub fn set_active_handler(hard_fork_name: &str) {
     unsafe { 
-        let handler = ACTIVE_HANDLER.get(); 
-        if let Some(h) = &*handler {
+        let handler: Option<&Option<(String, Rc<dyn CircuitsHandler>)>> = ACTIVE_HANDLER.get(); 
+        if let Some(h) = handler {
             if h.0 == hard_fork_name {
                 return;
             }
