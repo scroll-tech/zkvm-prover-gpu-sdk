@@ -71,7 +71,7 @@ impl EuclidProver {
         })
     }
 
-    pub fn get_proof_data(&self, proof_type: ProofType, input: String) -> Result<String> {
+    pub fn get_proof_data(&self, proof_type: ProofType, input: String, fork_name: String) -> Result<String> {
         match proof_type {
             ProofType::Chunk => {
                 let witnesses: Vec<sbv_primitives::types::BlockWitness> =
@@ -80,6 +80,7 @@ impl EuclidProver {
                 let proof = self.chunk_prover.gen_proof(&ChunkProvingTask {
                     block_witnesses: witnesses,
                     prev_msg_queue_hash: Default::default(),
+                    fork_name,
                 })?;
 
                 Ok(serde_json::to_string(&proof)?)
