@@ -52,8 +52,8 @@ impl EuclidProver {
             segment_len: Some((1 << 22) - 100),
             ..Default::default()
         };
-        let bundle_prover =
-            BundleProver::setup(bundle_prover_config).expect("Failed to setup bundle prover");
+        let bundle_prover = BundleProverEuclidV2::setup(bundle_prover_config)
+            .expect("Failed to setup bundle prover");
 
         Self {
             chunk_prover,
@@ -71,7 +71,12 @@ impl EuclidProver {
         })
     }
 
-    pub fn get_proof_data(&self, proof_type: ProofType, input: String, fork_name: String) -> Result<String> {
+    pub fn get_proof_data(
+        &self,
+        proof_type: ProofType,
+        input: String,
+        fork_name: String,
+    ) -> Result<String> {
         match proof_type {
             ProofType::Chunk => {
                 let witnesses: Vec<sbv_primitives::types::BlockWitness> =

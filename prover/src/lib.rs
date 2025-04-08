@@ -15,7 +15,11 @@ pub unsafe extern "C" fn init(config: *const c_char) {
     prover::init(config_str.to_string());
 }
 
-fn generate_proof(input: *const c_char, proof_type: ProofType, fork_name: *const c_char) -> *mut c_char {
+fn generate_proof(
+    input: *const c_char,
+    proof_type: ProofType,
+    fork_name: *const c_char,
+) -> *mut c_char {
     let prover = prover::get_prover().unwrap();
     let input_str = c_char_to_str(input).to_string();
     let fork_name_str = c_char_to_str(input).to_string();
@@ -46,17 +50,26 @@ fn generate_proof(input: *const c_char, proof_type: ProofType, fork_name: *const
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn generate_chunk_proof(input: *const c_char, fork_name: *const c_char) -> *mut c_char {
+pub unsafe extern "C" fn generate_chunk_proof(
+    input: *const c_char,
+    fork_name: *const c_char,
+) -> *mut c_char {
     generate_proof(input, ProofType::Chunk, fork_name)
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn generate_batch_proof(input: *const c_char, fork_name: *const c_char) -> *mut c_char {
+pub unsafe extern "C" fn generate_batch_proof(
+    input: *const c_char,
+    fork_name: *const c_char,
+) -> *mut c_char {
     generate_proof(input, ProofType::Batch, fork_name)
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn generate_bundle_proof(input: *const c_char, fork_name: *const c_char) -> *mut c_char {
+pub unsafe extern "C" fn generate_bundle_proof(
+    input: *const c_char,
+    fork_name: *const c_char,
+) -> *mut c_char {
     generate_proof(input, ProofType::Bundle, fork_name)
 }
 
