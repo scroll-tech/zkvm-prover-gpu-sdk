@@ -12,7 +12,13 @@ wget https://circuit-release.s3.us-west-2.amazonaws.com/scroll-zkvm/releases/$SC
 wget https://circuit-release.s3.us-west-2.amazonaws.com/scroll-zkvm/releases/$SCROLL_ZKVM_VERSION/batch/openvm.toml -O ./assets/batch/openvm.toml
 
 wget https://circuit-release.s3.us-west-2.amazonaws.com/scroll-zkvm/releases/$SCROLL_ZKVM_VERSION/bundle/app.vmexe -O ./assets/bundle/app.vmexe
+wget https://circuit-release.s3.us-west-2.amazonaws.com/scroll-zkvm/releases/$SCROLL_ZKVM_VERSION/bundle/app.vmexe -O ./assets/bundle/app_euclidv1.vmexe
 wget https://circuit-release.s3.us-west-2.amazonaws.com/scroll-zkvm/releases/$SCROLL_ZKVM_VERSION/bundle/openvm.toml -O ./assets/bundle/openvm.toml
+wget https://circuit-release.s3.us-west-2.amazonaws.com/scroll-zkvm/releases/$SCROLL_ZKVM_VERSION/bundle/openvm.toml -O ./assets/bundle/verifier.bin
+wget https://circuit-release.s3.us-west-2.amazonaws.com/scroll-zkvm/releases/$SCROLL_ZKVM_VERSION/bundle/openvm.toml -O ./assets/bundle/verifier.sol
+wget https://circuit-release.s3.us-west-2.amazonaws.com/scroll-zkvm/releases/$SCROLL_ZKVM_VERSION/bundle/openvm.toml -O ./assets/bundle/digest_1.hex
+wget https://circuit-release.s3.us-west-2.amazonaws.com/scroll-zkvm/releases/$SCROLL_ZKVM_VERSION/bundle/openvm.toml -O ./assets/bundle/digest_1_euclidv1.hex
+wget https://circuit-release.s3.us-west-2.amazonaws.com/scroll-zkvm/releases/$SCROLL_ZKVM_VERSION/bundle/openvm.toml -O ./assets/bundle/digest_2_euclidv1.hex
 
 wget "https://circuit-release.s3.us-west-2.amazonaws.com/scroll-zkvm/params/kzg_bn254_22.srs" -O ./params/kzg_bn254_22.srs
 wget  "https://circuit-release.s3.us-west-2.amazonaws.com/scroll-zkvm/params/kzg_bn254_24.srs" -O ./params/kzg_bn254_24.srs

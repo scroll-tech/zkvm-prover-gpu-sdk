@@ -3,15 +3,16 @@ use std::path::Path;
 use anyhow::Result;
 use euclid_prover::{
     task::{batch::BatchProvingTask, bundle::BundleProvingTask, chunk::ChunkProvingTask},
-    BatchProver, BundleProver, ChunkProver, ProverConfig,
+    BatchProver, BundleProverEuclidV2, ChunkProver, ProverConfig,
 };
+use log::info;
 
 use super::ProofType;
 
 pub struct EuclidProver {
     chunk_prover: ChunkProver,
     batch_prover: BatchProver,
-    bundle_prover: BundleProver,
+    bundle_prover: BundleProverEuclidV2,
 }
 
 impl EuclidProver {
@@ -52,8 +53,8 @@ impl EuclidProver {
             segment_len: Some((1 << 22) - 100),
             ..Default::default()
         };
-        let bundle_prover =
-            BundleProver::setup(bundle_prover_config).expect("Failed to setup bundle prover");
+        let bundle_prover = BundleProverEuclidV2::setup(bundle_prover_config)
+            .expect("Failed to setup bundle prover");
 
         Self {
             chunk_prover,
@@ -71,15 +72,20 @@ impl EuclidProver {
         })
     }
 
-    pub fn get_proof_data(&self, proof_type: ProofType, input: String) -> Result<String> {
+    pub fn get_proof_data(
+        &self,
+        proof_type: ProofType,
+        input: String,
+        fork_name: String,
+    ) -> Result<String> {
         match proof_type {
             ProofType::Chunk => {
                 let witnesses: Vec<sbv_primitives::types::BlockWitness> =
                     serde_json::from_str(&input)?;
-
                 let proof = self.chunk_prover.gen_proof(&ChunkProvingTask {
                     block_witnesses: witnesses,
                     prev_msg_queue_hash: Default::default(),
+                    fork_name: Default::default(),
                 })?;
 
                 Ok(serde_json::to_string(&proof)?)

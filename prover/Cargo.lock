@@ -1527,15 +1527,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "dirs"
-version = "5.0.1"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "44c45a9d03d6676652bcb5e724c7e988de1acad23a711b5217ab9cbecbec2225"
-dependencies = [
- "dirs-sys",
-]
-
-[[package]]
 name = "dirs-sys"
 version = "0.4.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -2004,15 +1995,15 @@ dependencies = [
 
 [[package]]
 name = "halo2-axiom"
-version = "0.4.5"
+version = "0.5.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "9f81aee7974478f9e3ea0cfd349d2a59a3482f7844386486a98e4af9ed8bada6"
+checksum = "62f0ca78d12ac5c893f286d7cdfe3869290305ab8cac376e2592cdc8396da102"
 dependencies = [
  "blake2b_simd",
  "crossbeam",
  "ff 0.13.1",
  "group 0.13.0",
- "halo2curves-axiom 0.7.0",
+ "halo2curves-axiom",
  "itertools 0.11.0",
  "maybe-rayon",
  "pairing 0.23.0",
@@ -2026,8 +2017,9 @@ dependencies = [
 
 [[package]]
 name = "halo2-base"
-version = "0.4.1"
-source = "git+https://github.com/axiom-crypto/halo2-lib.git?tag=v0.4.1-git#2fe813b3ccd4f224da195d61829effb20599dcbd"
+version = "0.5.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "678cf3adc0a39d7b4d9b82315a655201aa24a430dd1902b162c508047f56ac69"
 dependencies = [
  "getset",
  "halo2-axiom",
@@ -2046,8 +2038,9 @@ dependencies = [
 
 [[package]]
 name = "halo2-ecc"
-version = "0.4.1"
-source = "git+https://github.com/axiom-crypto/halo2-lib.git?tag=v0.4.1-git#2fe813b3ccd4f224da195d61829effb20599dcbd"
+version = "0.5.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "645c00681fdd1febaf552d8814e9f5a6a142d81a1514102190da07039588b366"
 dependencies = [
  "halo2-base",
  "itertools 0.11.0",
@@ -2104,33 +2097,6 @@ dependencies = [
  "static_assertions",
  "subtle",
  "unroll",
-]
-
-[[package]]
-name = "halo2curves-axiom"
-version = "0.5.3"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "75bb262279138550a603b35a73da944fcde987a321eb550c05276ce7b0a4e692"
-dependencies = [
- "blake2b_simd",
- "digest 0.10.7",
- "ff 0.13.1",
- "group 0.13.0",
- "hex",
- "lazy_static",
- "maybe-rayon",
- "num-bigint 0.4.6",
- "num-traits",
- "pairing 0.23.0",
- "pasta_curves 0.5.1",
- "paste",
- "rand",
- "rand_core",
- "serde",
- "serde_arrays",
- "sha2",
- "static_assertions",
- "subtle",
 ]
 
 [[package]]
@@ -3097,12 +3063,10 @@ dependencies = [
 [[package]]
 name = "openvm"
 version = "1.0.0-rc.2"
-source = "git+https://github.com/openvm-org/openvm.git?rev=7f87e1d#7f87e1ddfb420a2c73c141c8ce35990f4c93086a"
+source = "git+https://github.com/openvm-org/openvm.git?rev=3c35e9f#3c35e9f369da8dee065a089fb72f3580af7dcaf9"
 dependencies = [
  "bytemuck",
- "hex-literal",
  "num-bigint 0.4.6",
- "num-traits",
  "openvm-custom-insn",
  "openvm-platform",
  "openvm-rv32im-guest",
@@ -3112,7 +3076,7 @@ dependencies = [
 [[package]]
 name = "openvm-algebra-circuit"
 version = "1.0.0-rc.2"
-source = "git+https://github.com/openvm-org/openvm.git?rev=7f87e1d#7f87e1ddfb420a2c73c141c8ce35990f4c93086a"
+source = "git+https://github.com/openvm-org/openvm.git?rev=3c35e9f#3c35e9f369da8dee065a089fb72f3580af7dcaf9"
 dependencies = [
  "derive-new 0.6.0",
  "derive_more 1.0.0",
@@ -3135,13 +3099,12 @@ dependencies = [
  "serde-big-array",
  "serde_with",
  "strum 0.26.3",
- "tracing",
 ]
 
 [[package]]
 name = "openvm-algebra-complex-macros"
 version = "0.1.0"
-source = "git+https://github.com/openvm-org/openvm.git?rev=7f87e1d#7f87e1ddfb420a2c73c141c8ce35990f4c93086a"
+source = "git+https://github.com/openvm-org/openvm.git?rev=3c35e9f#3c35e9f369da8dee065a089fb72f3580af7dcaf9"
 dependencies = [
  "openvm-macros-common",
  "quote",
@@ -3151,15 +3114,12 @@ dependencies = [
 [[package]]
 name = "openvm-algebra-guest"
 version = "1.0.0-rc.2"
-source = "git+https://github.com/openvm-org/openvm.git?rev=7f87e1d#7f87e1ddfb420a2c73c141c8ce35990f4c93086a"
+source = "git+https://github.com/openvm-org/openvm.git?rev=3c35e9f#3c35e9f369da8dee065a089fb72f3580af7dcaf9"
 dependencies = [
- "halo2curves-axiom 0.5.3",
+ "halo2curves-axiom",
  "num-bigint 0.4.6",
- "openvm",
  "openvm-algebra-complex-macros",
  "openvm-algebra-moduli-macros",
- "openvm-platform",
- "serde",
  "serde-big-array",
  "strum_macros 0.26.4",
 ]
@@ -3167,7 +3127,7 @@ dependencies = [
 [[package]]
 name = "openvm-algebra-moduli-macros"
 version = "1.0.0-rc.2"
-source = "git+https://github.com/openvm-org/openvm.git?rev=7f87e1d#7f87e1ddfb420a2c73c141c8ce35990f4c93086a"
+source = "git+https://github.com/openvm-org/openvm.git?rev=3c35e9f#3c35e9f369da8dee065a089fb72f3580af7dcaf9"
 dependencies = [
  "openvm-macros-common",
  "quote",
@@ -3177,7 +3137,7 @@ dependencies = [
 [[package]]
 name = "openvm-algebra-transpiler"
 version = "1.0.0-rc.2"
-source = "git+https://github.com/openvm-org/openvm.git?rev=7f87e1d#7f87e1ddfb420a2c73c141c8ce35990f4c93086a"
+source = "git+https://github.com/openvm-org/openvm.git?rev=3c35e9f#3c35e9f369da8dee065a089fb72f3580af7dcaf9"
 dependencies = [
  "openvm-algebra-guest",
  "openvm-instructions",
@@ -3186,13 +3146,12 @@ dependencies = [
  "openvm-transpiler",
  "rrs-lib",
  "strum 0.26.3",
- "strum_macros 0.26.4",
 ]
 
 [[package]]
 name = "openvm-bigint-circuit"
 version = "1.0.0-rc.2"
-source = "git+https://github.com/openvm-org/openvm.git?rev=7f87e1d#7f87e1ddfb420a2c73c141c8ce35990f4c93086a"
+source = "git+https://github.com/openvm-org/openvm.git?rev=3c35e9f#3c35e9f369da8dee065a089fb72f3580af7dcaf9"
 dependencies = [
  "derive-new 0.6.0",
  "derive_more 1.0.0",
@@ -3214,20 +3173,21 @@ dependencies = [
 [[package]]
 name = "openvm-bigint-guest"
 version = "1.0.0-rc.2"
-source = "git+https://github.com/openvm-org/openvm.git?rev=7f87e1d#7f87e1ddfb420a2c73c141c8ce35990f4c93086a"
+source = "git+https://github.com/openvm-org/openvm.git?rev=3c35e9f#3c35e9f369da8dee065a089fb72f3580af7dcaf9"
 dependencies = [
  "num-bigint 0.4.6",
  "num-traits",
  "openvm",
  "openvm-platform",
  "serde",
+ "serde-big-array",
  "strum_macros 0.26.4",
 ]
 
 [[package]]
 name = "openvm-bigint-transpiler"
 version = "1.0.0-rc.2"
-source = "git+https://github.com/openvm-org/openvm.git?rev=7f87e1d#7f87e1ddfb420a2c73c141c8ce35990f4c93086a"
+source = "git+https://github.com/openvm-org/openvm.git?rev=3c35e9f#3c35e9f369da8dee065a089fb72f3580af7dcaf9"
 dependencies = [
  "openvm-bigint-guest",
  "openvm-instructions",
@@ -3242,26 +3202,21 @@ dependencies = [
 [[package]]
 name = "openvm-build"
 version = "1.0.0-rc.2"
-source = "git+https://github.com/openvm-org/openvm.git?rev=7f87e1d#7f87e1ddfb420a2c73c141c8ce35990f4c93086a"
+source = "git+https://github.com/openvm-org/openvm.git?rev=3c35e9f#3c35e9f369da8dee065a089fb72f3580af7dcaf9"
 dependencies = [
  "cargo_metadata",
- "dirs",
  "eyre",
- "hex",
  "openvm-platform",
  "serde",
  "serde_json",
- "tempfile",
 ]
 
 [[package]]
 name = "openvm-circuit"
 version = "1.0.0-rc.2"
-source = "git+https://github.com/openvm-org/openvm.git?rev=7f87e1d#7f87e1ddfb420a2c73c141c8ce35990f4c93086a"
+source = "git+https://github.com/openvm-org/openvm.git?rev=3c35e9f#3c35e9f369da8dee065a089fb72f3580af7dcaf9"
 dependencies = [
- "async-trait",
  "backtrace",
- "bitcode",
  "cfg-if",
  "derivative",
  "derive-new 0.6.0",
@@ -3271,7 +3226,6 @@ dependencies = [
  "getset",
  "itertools 0.14.0",
  "metrics 0.23.0",
- "metrics-derive",
  "openvm-circuit-derive",
  "openvm-circuit-primitives",
  "openvm-circuit-primitives-derive",
@@ -3279,25 +3233,21 @@ dependencies = [
  "openvm-poseidon2-air",
  "openvm-stark-backend",
  "p3-baby-bear",
- "p3-symmetric",
  "rand",
- "rayon",
  "rustc-hash 2.1.1",
  "serde",
  "serde-big-array",
  "static_assertions",
  "thiserror 1.0.69",
- "toml",
  "tracing",
 ]
 
 [[package]]
 name = "openvm-circuit-derive"
 version = "1.0.0-rc.2"
-source = "git+https://github.com/openvm-org/openvm.git?rev=7f87e1d#7f87e1ddfb420a2c73c141c8ce35990f4c93086a"
+source = "git+https://github.com/openvm-org/openvm.git?rev=3c35e9f#3c35e9f369da8dee065a089fb72f3580af7dcaf9"
 dependencies = [
  "itertools 0.14.0",
- "proc-macro2",
  "quote",
  "syn 2.0.100",
 ]
@@ -3305,28 +3255,24 @@ dependencies = [
 [[package]]
 name = "openvm-circuit-primitives"
 version = "1.0.0-rc.2"
-source = "git+https://github.com/openvm-org/openvm.git?rev=7f87e1d#7f87e1ddfb420a2c73c141c8ce35990f4c93086a"
+source = "git+https://github.com/openvm-org/openvm.git?rev=3c35e9f#3c35e9f369da8dee065a089fb72f3580af7dcaf9"
 dependencies = [
- "bitcode",
  "derive-new 0.6.0",
  "itertools 0.14.0",
- "lazy_static",
  "num-bigint 0.4.6",
  "num-traits",
  "openvm-circuit-primitives-derive",
  "openvm-stark-backend",
  "rand",
- "serde",
  "tracing",
 ]
 
 [[package]]
 name = "openvm-circuit-primitives-derive"
 version = "1.0.0-rc.2"
-source = "git+https://github.com/openvm-org/openvm.git?rev=7f87e1d#7f87e1ddfb420a2c73c141c8ce35990f4c93086a"
+source = "git+https://github.com/openvm-org/openvm.git?rev=3c35e9f#3c35e9f369da8dee065a089fb72f3580af7dcaf9"
 dependencies = [
  "itertools 0.14.0",
- "proc-macro2",
  "quote",
  "syn 2.0.100",
 ]
@@ -3334,11 +3280,10 @@ dependencies = [
 [[package]]
 name = "openvm-continuations"
 version = "1.0.0-rc.2"
-source = "git+https://github.com/openvm-org/openvm.git?rev=7f87e1d#7f87e1ddfb420a2c73c141c8ce35990f4c93086a"
+source = "git+https://github.com/openvm-org/openvm.git?rev=3c35e9f#3c35e9f369da8dee065a089fb72f3580af7dcaf9"
 dependencies = [
  "derivative",
  "openvm-circuit",
- "openvm-native-circuit",
  "openvm-native-compiler",
  "openvm-native-recursion",
  "openvm-stark-backend",
@@ -3350,7 +3295,7 @@ dependencies = [
 [[package]]
 name = "openvm-custom-insn"
 version = "0.1.0"
-source = "git+https://github.com/openvm-org/openvm.git?rev=7f87e1d#7f87e1ddfb420a2c73c141c8ce35990f4c93086a"
+source = "git+https://github.com/openvm-org/openvm.git?rev=3c35e9f#3c35e9f369da8dee065a089fb72f3580af7dcaf9"
 dependencies = [
  "proc-macro2",
  "quote",
@@ -3360,12 +3305,11 @@ dependencies = [
 [[package]]
 name = "openvm-ecc-circuit"
 version = "1.0.0-rc.2"
-source = "git+https://github.com/openvm-org/openvm.git?rev=7f87e1d#7f87e1ddfb420a2c73c141c8ce35990f4c93086a"
+source = "git+https://github.com/openvm-org/openvm.git?rev=3c35e9f#3c35e9f369da8dee065a089fb72f3580af7dcaf9"
 dependencies = [
  "derive-new 0.6.0",
  "derive_more 1.0.0",
  "eyre",
- "itertools 0.14.0",
  "num-bigint 0.4.6",
  "num-integer",
  "num-traits",
@@ -3392,28 +3336,24 @@ dependencies = [
 [[package]]
 name = "openvm-ecc-guest"
 version = "1.0.0-rc.2"
-source = "git+https://github.com/openvm-org/openvm.git?rev=7f87e1d#7f87e1ddfb420a2c73c141c8ce35990f4c93086a"
+source = "git+https://github.com/openvm-org/openvm.git?rev=3c35e9f#3c35e9f369da8dee065a089fb72f3580af7dcaf9"
 dependencies = [
  "ecdsa",
  "elliptic-curve",
  "group 0.13.0",
- "halo2curves-axiom 0.5.3",
+ "halo2curves-axiom",
  "hex-literal",
- "itertools 0.14.0",
  "k256",
  "lazy_static",
  "num-bigint 0.4.6",
- "num-traits",
  "once_cell",
  "openvm",
  "openvm-algebra-guest",
  "openvm-algebra-moduli-macros",
  "openvm-custom-insn",
  "openvm-ecc-sw-macros",
- "openvm-platform",
  "openvm-rv32im-guest",
  "p256",
- "rand",
  "serde",
  "strum_macros 0.26.4",
 ]
@@ -3421,7 +3361,7 @@ dependencies = [
 [[package]]
 name = "openvm-ecc-sw-macros"
 version = "1.0.0-rc.2"
-source = "git+https://github.com/openvm-org/openvm.git?rev=7f87e1d#7f87e1ddfb420a2c73c141c8ce35990f4c93086a"
+source = "git+https://github.com/openvm-org/openvm.git?rev=3c35e9f#3c35e9f369da8dee065a089fb72f3580af7dcaf9"
 dependencies = [
  "openvm-macros-common",
  "quote",
@@ -3431,7 +3371,7 @@ dependencies = [
 [[package]]
 name = "openvm-ecc-transpiler"
 version = "1.0.0-rc.2"
-source = "git+https://github.com/openvm-org/openvm.git?rev=7f87e1d#7f87e1ddfb420a2c73c141c8ce35990f4c93086a"
+source = "git+https://github.com/openvm-org/openvm.git?rev=3c35e9f#3c35e9f369da8dee065a089fb72f3580af7dcaf9"
 dependencies = [
  "openvm-ecc-guest",
  "openvm-instructions",
@@ -3445,7 +3385,7 @@ dependencies = [
 [[package]]
 name = "openvm-instructions"
 version = "1.0.0-rc.2"
-source = "git+https://github.com/openvm-org/openvm.git?rev=7f87e1d#7f87e1ddfb420a2c73c141c8ce35990f4c93086a"
+source = "git+https://github.com/openvm-org/openvm.git?rev=3c35e9f#3c35e9f369da8dee065a089fb72f3580af7dcaf9"
 dependencies = [
  "backtrace",
  "derive-new 0.6.0",
@@ -3462,9 +3402,8 @@ dependencies = [
 [[package]]
 name = "openvm-instructions-derive"
 version = "1.0.0-rc.2"
-source = "git+https://github.com/openvm-org/openvm.git?rev=7f87e1d#7f87e1ddfb420a2c73c141c8ce35990f4c93086a"
+source = "git+https://github.com/openvm-org/openvm.git?rev=3c35e9f#3c35e9f369da8dee065a089fb72f3580af7dcaf9"
 dependencies = [
- "proc-macro2",
  "quote",
  "syn 2.0.100",
 ]
@@ -3472,13 +3411,10 @@ dependencies = [
 [[package]]
 name = "openvm-keccak256-circuit"
 version = "1.0.0-rc.2"
-source = "git+https://github.com/openvm-org/openvm.git?rev=7f87e1d#7f87e1ddfb420a2c73c141c8ce35990f4c93086a"
+source = "git+https://github.com/openvm-org/openvm.git?rev=3c35e9f#3c35e9f369da8dee065a089fb72f3580af7dcaf9"
 dependencies = [
- "bitcode",
  "derive-new 0.6.0",
  "derive_more 1.0.0",
- "eyre",
- "hex-literal",
  "itertools 0.14.0",
  "openvm-circuit",
  "openvm-circuit-derive",
@@ -3501,17 +3437,16 @@ dependencies = [
 [[package]]
 name = "openvm-keccak256-guest"
 version = "1.0.0-rc.2"
-source = "git+https://github.com/openvm-org/openvm.git?rev=7f87e1d#7f87e1ddfb420a2c73c141c8ce35990f4c93086a"
+source = "git+https://github.com/openvm-org/openvm.git?rev=3c35e9f#3c35e9f369da8dee065a089fb72f3580af7dcaf9"
 dependencies = [
  "openvm-platform",
- "serde",
  "tiny-keccak",
 ]
 
 [[package]]
 name = "openvm-keccak256-transpiler"
 version = "1.0.0-rc.2"
-source = "git+https://github.com/openvm-org/openvm.git?rev=7f87e1d#7f87e1ddfb420a2c73c141c8ce35990f4c93086a"
+source = "git+https://github.com/openvm-org/openvm.git?rev=3c35e9f#3c35e9f369da8dee065a089fb72f3580af7dcaf9"
 dependencies = [
  "openvm-instructions",
  "openvm-instructions-derive",
@@ -3525,7 +3460,7 @@ dependencies = [
 [[package]]
 name = "openvm-macros-common"
 version = "1.0.0-rc.2"
-source = "git+https://github.com/openvm-org/openvm.git?rev=7f87e1d#7f87e1ddfb420a2c73c141c8ce35990f4c93086a"
+source = "git+https://github.com/openvm-org/openvm.git?rev=3c35e9f#3c35e9f369da8dee065a089fb72f3580af7dcaf9"
 dependencies = [
  "syn 2.0.100",
 ]
@@ -3533,7 +3468,7 @@ dependencies = [
 [[package]]
 name = "openvm-mod-circuit-builder"
 version = "1.0.0-rc.2"
-source = "git+https://github.com/openvm-org/openvm.git?rev=7f87e1d#7f87e1ddfb420a2c73c141c8ce35990f4c93086a"
+source = "git+https://github.com/openvm-org/openvm.git?rev=3c35e9f#3c35e9f369da8dee065a089fb72f3580af7dcaf9"
 dependencies = [
  "itertools 0.14.0",
  "num-bigint 0.4.6",
@@ -3552,9 +3487,8 @@ dependencies = [
 [[package]]
 name = "openvm-native-circuit"
 version = "1.0.0-rc.2"
-source = "git+https://github.com/openvm-org/openvm.git?rev=7f87e1d#7f87e1ddfb420a2c73c141c8ce35990f4c93086a"
+source = "git+https://github.com/openvm-org/openvm.git?rev=3c35e9f#3c35e9f369da8dee065a089fb72f3580af7dcaf9"
 dependencies = [
- "bitcode",
  "derive-new 0.6.0",
  "derive_more 1.0.0",
  "eyre",
@@ -3580,7 +3514,7 @@ dependencies = [
 [[package]]
 name = "openvm-native-compiler"
 version = "1.0.0-rc.2"
-source = "git+https://github.com/openvm-org/openvm.git?rev=7f87e1d#7f87e1ddfb420a2c73c141c8ce35990f4c93086a"
+source = "git+https://github.com/openvm-org/openvm.git?rev=3c35e9f#3c35e9f369da8dee065a089fb72f3580af7dcaf9"
 dependencies = [
  "backtrace",
  "itertools 0.14.0",
@@ -3604,9 +3538,8 @@ dependencies = [
 [[package]]
 name = "openvm-native-compiler-derive"
 version = "1.0.0-rc.2"
-source = "git+https://github.com/openvm-org/openvm.git?rev=7f87e1d#7f87e1ddfb420a2c73c141c8ce35990f4c93086a"
+source = "git+https://github.com/openvm-org/openvm.git?rev=3c35e9f#3c35e9f369da8dee065a089fb72f3580af7dcaf9"
 dependencies = [
- "proc-macro2",
  "quote",
  "syn 2.0.100",
 ]
@@ -3614,7 +3547,7 @@ dependencies = [
 [[package]]
 name = "openvm-native-recursion"
 version = "1.0.0-rc.2"
-source = "git+https://github.com/openvm-org/openvm.git?rev=7f87e1d#7f87e1ddfb420a2c73c141c8ce35990f4c93086a"
+source = "git+https://github.com/openvm-org/openvm.git?rev=3c35e9f#3c35e9f369da8dee065a089fb72f3580af7dcaf9"
 dependencies = [
  "cfg-if",
  "itertools 0.14.0",
@@ -3634,6 +3567,7 @@ dependencies = [
  "rand",
  "serde",
  "serde_json",
+ "serde_with",
  "snark-verifier-sdk",
  "tracing",
 ]
@@ -3641,7 +3575,7 @@ dependencies = [
 [[package]]
 name = "openvm-pairing-circuit"
 version = "1.0.0-rc.2"
-source = "git+https://github.com/openvm-org/openvm.git?rev=7f87e1d#7f87e1ddfb420a2c73c141c8ce35990f4c93086a"
+source = "git+https://github.com/openvm-org/openvm.git?rev=3c35e9f#3c35e9f369da8dee065a089fb72f3580af7dcaf9"
 dependencies = [
  "derive-new 0.6.0",
  "derive_more 1.0.0",
@@ -3671,10 +3605,10 @@ dependencies = [
 [[package]]
 name = "openvm-pairing-guest"
 version = "1.0.0-rc.2"
-source = "git+https://github.com/openvm-org/openvm.git?rev=7f87e1d#7f87e1ddfb420a2c73c141c8ce35990f4c93086a"
+source = "git+https://github.com/openvm-org/openvm.git?rev=3c35e9f#3c35e9f369da8dee065a089fb72f3580af7dcaf9"
 dependencies = [
  "group 0.13.0",
- "halo2curves-axiom 0.5.3",
+ "halo2curves-axiom",
  "hex-literal",
  "itertools 0.14.0",
  "lazy_static",
@@ -3697,7 +3631,7 @@ dependencies = [
 [[package]]
 name = "openvm-pairing-transpiler"
 version = "1.0.0-rc.2"
-source = "git+https://github.com/openvm-org/openvm.git?rev=7f87e1d#7f87e1ddfb420a2c73c141c8ce35990f4c93086a"
+source = "git+https://github.com/openvm-org/openvm.git?rev=3c35e9f#3c35e9f369da8dee065a089fb72f3580af7dcaf9"
 dependencies = [
  "openvm-instructions",
  "openvm-instructions-derive",
@@ -3711,25 +3645,21 @@ dependencies = [
 [[package]]
 name = "openvm-platform"
 version = "1.0.0-rc.2"
-source = "git+https://github.com/openvm-org/openvm.git?rev=7f87e1d#7f87e1ddfb420a2c73c141c8ce35990f4c93086a"
+source = "git+https://github.com/openvm-org/openvm.git?rev=3c35e9f#3c35e9f369da8dee065a089fb72f3580af7dcaf9"
 dependencies = [
  "getrandom 0.2.15",
  "libm",
  "openvm-custom-insn",
  "openvm-rv32im-guest",
- "stability",
- "strum_macros 0.26.4",
 ]
 
 [[package]]
 name = "openvm-poseidon2-air"
 version = "1.0.0-rc.2"
-source = "git+https://github.com/openvm-org/openvm.git?rev=7f87e1d#7f87e1ddfb420a2c73c141c8ce35990f4c93086a"
+source = "git+https://github.com/openvm-org/openvm.git?rev=3c35e9f#3c35e9f369da8dee065a089fb72f3580af7dcaf9"
 dependencies = [
  "derivative",
- "itertools 0.14.0",
  "lazy_static",
- "openvm-circuit-primitives",
  "openvm-stark-backend",
  "openvm-stark-sdk",
  "p3-monty-31",
@@ -3737,14 +3667,13 @@ dependencies = [
  "p3-poseidon2-air",
  "p3-symmetric",
  "rand",
- "tracing",
  "zkhash",
 ]
 
 [[package]]
 name = "openvm-rv32-adapters"
 version = "1.0.0-rc.2"
-source = "git+https://github.com/openvm-org/openvm.git?rev=7f87e1d#7f87e1ddfb420a2c73c141c8ce35990f4c93086a"
+source = "git+https://github.com/openvm-org/openvm.git?rev=3c35e9f#3c35e9f369da8dee065a089fb72f3580af7dcaf9"
 dependencies = [
  "derive-new 0.6.0",
  "itertools 0.14.0",
@@ -3759,19 +3688,16 @@ dependencies = [
  "serde",
  "serde-big-array",
  "serde_with",
- "tracing",
 ]
 
 [[package]]
 name = "openvm-rv32im-circuit"
 version = "1.0.0-rc.2"
-source = "git+https://github.com/openvm-org/openvm.git?rev=7f87e1d#7f87e1ddfb420a2c73c141c8ce35990f4c93086a"
+source = "git+https://github.com/openvm-org/openvm.git?rev=3c35e9f#3c35e9f369da8dee065a089fb72f3580af7dcaf9"
 dependencies = [
- "bitcode",
  "derive-new 0.6.0",
  "derive_more 1.0.0",
  "eyre",
- "itertools 0.14.0",
  "num-bigint 0.4.6",
  "num-integer",
  "openvm-circuit",
@@ -3785,13 +3711,12 @@ dependencies = [
  "serde",
  "serde-big-array",
  "strum 0.26.3",
- "tracing",
 ]
 
 [[package]]
 name = "openvm-rv32im-guest"
 version = "1.0.0-rc.2"
-source = "git+https://github.com/openvm-org/openvm.git?rev=7f87e1d#7f87e1ddfb420a2c73c141c8ce35990f4c93086a"
+source = "git+https://github.com/openvm-org/openvm.git?rev=3c35e9f#3c35e9f369da8dee065a089fb72f3580af7dcaf9"
 dependencies = [
  "openvm-custom-insn",
  "strum_macros 0.26.4",
@@ -3800,9 +3725,8 @@ dependencies = [
 [[package]]
 name = "openvm-rv32im-transpiler"
 version = "1.0.0-rc.2"
-source = "git+https://github.com/openvm-org/openvm.git?rev=7f87e1d#7f87e1ddfb420a2c73c141c8ce35990f4c93086a"
+source = "git+https://github.com/openvm-org/openvm.git?rev=3c35e9f#3c35e9f369da8dee065a089fb72f3580af7dcaf9"
 dependencies = [
- "openvm-custom-insn",
  "openvm-instructions",
  "openvm-instructions-derive",
  "openvm-rv32im-guest",
@@ -3817,7 +3741,7 @@ dependencies = [
 [[package]]
 name = "openvm-sdk"
 version = "1.0.0-rc.2"
-source = "git+https://github.com/openvm-org/openvm.git?rev=7f87e1d#7f87e1ddfb420a2c73c141c8ce35990f4c93086a"
+source = "git+https://github.com/openvm-org/openvm.git?rev=3c35e9f#3c35e9f369da8dee065a089fb72f3580af7dcaf9"
 dependencies = [
  "async-trait",
  "bitcode",
@@ -3853,15 +3777,18 @@ dependencies = [
  "openvm-stark-backend",
  "openvm-stark-sdk",
  "openvm-transpiler",
+ "p3-fri",
  "serde",
- "static_assertions",
+ "serde_json",
+ "serde_with",
+ "thiserror 1.0.69",
  "tracing",
 ]
 
 [[package]]
 name = "openvm-sha256-air"
 version = "1.0.0-rc.2"
-source = "git+https://github.com/openvm-org/openvm.git?rev=7f87e1d#7f87e1ddfb420a2c73c141c8ce35990f4c93086a"
+source = "git+https://github.com/openvm-org/openvm.git?rev=3c35e9f#3c35e9f369da8dee065a089fb72f3580af7dcaf9"
 dependencies = [
  "openvm-circuit-primitives",
  "openvm-stark-backend",
@@ -3872,9 +3799,8 @@ dependencies = [
 [[package]]
 name = "openvm-sha256-circuit"
 version = "1.0.0-rc.2"
-source = "git+https://github.com/openvm-org/openvm.git?rev=7f87e1d#7f87e1ddfb420a2c73c141c8ce35990f4c93086a"
+source = "git+https://github.com/openvm-org/openvm.git?rev=3c35e9f#3c35e9f369da8dee065a089fb72f3580af7dcaf9"
 dependencies = [
- "bitcode",
  "derive-new 0.6.0",
  "derive_more 1.0.0",
  "openvm-circuit",
@@ -3896,9 +3822,8 @@ dependencies = [
 [[package]]
 name = "openvm-sha256-guest"
 version = "1.0.0-rc.2"
-source = "git+https://github.com/openvm-org/openvm.git?rev=7f87e1d#7f87e1ddfb420a2c73c141c8ce35990f4c93086a"
+source = "git+https://github.com/openvm-org/openvm.git?rev=3c35e9f#3c35e9f369da8dee065a089fb72f3580af7dcaf9"
 dependencies = [
- "openvm",
  "openvm-platform",
  "sha2",
 ]
@@ -3906,7 +3831,7 @@ dependencies = [
 [[package]]
 name = "openvm-sha256-transpiler"
 version = "1.0.0-rc.2"
-source = "git+https://github.com/openvm-org/openvm.git?rev=7f87e1d#7f87e1ddfb420a2c73c141c8ce35990f4c93086a"
+source = "git+https://github.com/openvm-org/openvm.git?rev=3c35e9f#3c35e9f369da8dee065a089fb72f3580af7dcaf9"
 dependencies = [
  "openvm-instructions",
  "openvm-instructions-derive",
@@ -3920,7 +3845,7 @@ dependencies = [
 [[package]]
 name = "openvm-stark-backend"
 version = "1.0.0-rc.2"
-source = "git+ssh://git@github.com/scroll-tech/openvm-stark-gpu.git?tag=v1.0.0-rc.2#482d7c8e3751d651fa0cda6de49b61c47d13a686"
+source = "git+ssh://git@github.com/scroll-tech/openvm-stark-gpu.git?branch=main#1baaa78b1b2d707d41a55ea0920d2555222d3108"
 dependencies = [
  "bitcode",
  "cfg-if",
@@ -3949,7 +3874,7 @@ dependencies = [
 [[package]]
 name = "openvm-stark-sdk"
 version = "1.0.0-rc.2"
-source = "git+ssh://git@github.com/scroll-tech/openvm-stark-gpu.git?tag=v1.0.0-rc.2#482d7c8e3751d651fa0cda6de49b61c47d13a686"
+source = "git+ssh://git@github.com/scroll-tech/openvm-stark-gpu.git?branch=main#1baaa78b1b2d707d41a55ea0920d2555222d3108"
 dependencies = [
  "derivative",
  "derive_more 0.99.19",
@@ -3985,18 +3910,15 @@ dependencies = [
 [[package]]
 name = "openvm-transpiler"
 version = "1.0.0-rc.2"
-source = "git+https://github.com/openvm-org/openvm.git?rev=7f87e1d#7f87e1ddfb420a2c73c141c8ce35990f4c93086a"
+source = "git+https://github.com/openvm-org/openvm.git?rev=3c35e9f#3c35e9f369da8dee065a089fb72f3580af7dcaf9"
 dependencies = [
- "derive_more 1.0.0",
  "elf",
  "eyre",
  "openvm-instructions",
  "openvm-platform",
  "openvm-stark-backend",
  "rrs-lib",
- "strum 0.26.3",
  "thiserror 1.0.69",
- "tracing",
 ]
 
 [[package]]
@@ -4617,9 +4539,9 @@ dependencies = [
 
 [[package]]
 name = "poseidon-primitives"
-version = "0.1.1"
+version = "0.2.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "2bd95570f7ea849b4187298b5bb229643e44e1d47ddf3979d0db8a1c28be26a8"
+checksum = "6e4aaeda7a092e21165cc5f0cbc738e72a46f31c03c3cbd87b71ceae9d2d93bc"
 dependencies = [
  "bitvec",
  "ff 0.13.1",
@@ -4970,7 +4892,7 @@ dependencies = [
 [[package]]
 name = "reth-chainspec"
 version = "1.1.5"
-source = "git+https://github.com/scroll-tech/reth?branch=zkvm%2Feuclid-upgrade#6fe70df6023c5096178d3378d3d584a9c6940552"
+source = "git+https://github.com/scroll-tech/reth?branch=zkvm%2Feuclid-upgrade#eb41a605a7efd77c2292a110745179d7d1a5b1de"
 dependencies = [
  "alloy-chains",
  "alloy-consensus",
@@ -4989,7 +4911,7 @@ dependencies = [
 [[package]]
 name = "reth-codecs"
 version = "1.1.5"
-source = "git+https://github.com/scroll-tech/reth?branch=zkvm%2Feuclid-upgrade#6fe70df6023c5096178d3378d3d584a9c6940552"
+source = "git+https://github.com/scroll-tech/reth?branch=zkvm%2Feuclid-upgrade#eb41a605a7efd77c2292a110745179d7d1a5b1de"
 dependencies = [
  "alloy-consensus",
  "alloy-eips",
@@ -5006,7 +4928,7 @@ dependencies = [
 [[package]]
 name = "reth-codecs-derive"
 version = "1.1.5"
-source = "git+https://github.com/scroll-tech/reth?branch=zkvm%2Feuclid-upgrade#6fe70df6023c5096178d3378d3d584a9c6940552"
+source = "git+https://github.com/scroll-tech/reth?branch=zkvm%2Feuclid-upgrade#eb41a605a7efd77c2292a110745179d7d1a5b1de"
 dependencies = [
  "convert_case 0.6.0",
  "proc-macro2",
@@ -5017,7 +4939,7 @@ dependencies = [
 [[package]]
 name = "reth-consensus"
 version = "1.1.5"
-source = "git+https://github.com/scroll-tech/reth?branch=zkvm%2Feuclid-upgrade#6fe70df6023c5096178d3378d3d584a9c6940552"
+source = "git+https://github.com/scroll-tech/reth?branch=zkvm%2Feuclid-upgrade#eb41a605a7efd77c2292a110745179d7d1a5b1de"
 dependencies = [
  "alloy-consensus",
  "alloy-eips",
@@ -5030,7 +4952,7 @@ dependencies = [
 [[package]]
 name = "reth-consensus-common"
 version = "1.1.5"
-source = "git+https://github.com/scroll-tech/reth?branch=zkvm%2Feuclid-upgrade#6fe70df6023c5096178d3378d3d584a9c6940552"
+source = "git+https://github.com/scroll-tech/reth?branch=zkvm%2Feuclid-upgrade#eb41a605a7efd77c2292a110745179d7d1a5b1de"
 dependencies = [
  "alloy-consensus",
  "alloy-eips",
@@ -5043,7 +4965,7 @@ dependencies = [
 [[package]]
 name = "reth-db"
 version = "1.1.5"
-source = "git+https://github.com/scroll-tech/reth?branch=zkvm%2Feuclid-upgrade#6fe70df6023c5096178d3378d3d584a9c6940552"
+source = "git+https://github.com/scroll-tech/reth?branch=zkvm%2Feuclid-upgrade#eb41a605a7efd77c2292a110745179d7d1a5b1de"
 dependencies = [
  "alloy-consensus",
  "alloy-primitives",
@@ -5067,7 +4989,7 @@ dependencies = [
 [[package]]
 name = "reth-db-api"
 version = "1.1.5"
-source = "git+https://github.com/scroll-tech/reth?branch=zkvm%2Feuclid-upgrade#6fe70df6023c5096178d3378d3d584a9c6940552"
+source = "git+https://github.com/scroll-tech/reth?branch=zkvm%2Feuclid-upgrade#eb41a605a7efd77c2292a110745179d7d1a5b1de"
 dependencies = [
  "alloy-consensus",
  "alloy-genesis",
@@ -5092,7 +5014,7 @@ dependencies = [
 [[package]]
 name = "reth-db-models"
 version = "1.1.5"
-source = "git+https://github.com/scroll-tech/reth?branch=zkvm%2Feuclid-upgrade#6fe70df6023c5096178d3378d3d584a9c6940552"
+source = "git+https://github.com/scroll-tech/reth?branch=zkvm%2Feuclid-upgrade#eb41a605a7efd77c2292a110745179d7d1a5b1de"
 dependencies = [
  "alloy-eips",
  "alloy-primitives",
@@ -5106,7 +5028,7 @@ dependencies = [
 [[package]]
 name = "reth-ethereum-consensus"
 version = "1.1.5"
-source = "git+https://github.com/scroll-tech/reth?branch=zkvm%2Feuclid-upgrade#6fe70df6023c5096178d3378d3d584a9c6940552"
+source = "git+https://github.com/scroll-tech/reth?branch=zkvm%2Feuclid-upgrade#eb41a605a7efd77c2292a110745179d7d1a5b1de"
 dependencies = [
  "alloy-consensus",
  "alloy-eips",
@@ -5122,7 +5044,7 @@ dependencies = [
 [[package]]
 name = "reth-ethereum-forks"
 version = "1.1.5"
-source = "git+https://github.com/scroll-tech/reth?branch=zkvm%2Feuclid-upgrade#6fe70df6023c5096178d3378d3d584a9c6940552"
+source = "git+https://github.com/scroll-tech/reth?branch=zkvm%2Feuclid-upgrade#eb41a605a7efd77c2292a110745179d7d1a5b1de"
 dependencies = [
  "alloy-chains",
  "alloy-eip2124",
@@ -5137,7 +5059,7 @@ dependencies = [
 [[package]]
 name = "reth-ethereum-primitives"
 version = "1.1.5"
-source = "git+https://github.com/scroll-tech/reth?branch=zkvm%2Feuclid-upgrade#6fe70df6023c5096178d3378d3d584a9c6940552"
+source = "git+https://github.com/scroll-tech/reth?branch=zkvm%2Feuclid-upgrade#eb41a605a7efd77c2292a110745179d7d1a5b1de"
 dependencies = [
  "alloy-consensus",
  "alloy-eips",
@@ -5157,7 +5079,7 @@ dependencies = [
 [[package]]
 name = "reth-evm"
 version = "1.1.5"
-source = "git+https://github.com/scroll-tech/reth?branch=zkvm%2Feuclid-upgrade#6fe70df6023c5096178d3378d3d584a9c6940552"
+source = "git+https://github.com/scroll-tech/reth?branch=zkvm%2Feuclid-upgrade#eb41a605a7efd77c2292a110745179d7d1a5b1de"
 dependencies = [
  "alloy-consensus",
  "alloy-eips",
@@ -5182,7 +5104,7 @@ dependencies = [
 [[package]]
 name = "reth-evm-ethereum"
 version = "1.1.5"
-source = "git+https://github.com/scroll-tech/reth?branch=zkvm%2Feuclid-upgrade#6fe70df6023c5096178d3378d3d584a9c6940552"
+source = "git+https://github.com/scroll-tech/reth?branch=zkvm%2Feuclid-upgrade#eb41a605a7efd77c2292a110745179d7d1a5b1de"
 dependencies = [
  "alloy-consensus",
  "alloy-eips",
@@ -5203,7 +5125,7 @@ dependencies = [
 [[package]]
 name = "reth-execution-errors"
 version = "1.1.5"
-source = "git+https://github.com/scroll-tech/reth?branch=zkvm%2Feuclid-upgrade#6fe70df6023c5096178d3378d3d584a9c6940552"
+source = "git+https://github.com/scroll-tech/reth?branch=zkvm%2Feuclid-upgrade#eb41a605a7efd77c2292a110745179d7d1a5b1de"
 dependencies = [
  "alloy-eips",
  "alloy-primitives",
@@ -5217,7 +5139,7 @@ dependencies = [
 [[package]]
 name = "reth-execution-types"
 version = "1.1.5"
-source = "git+https://github.com/scroll-tech/reth?branch=zkvm%2Feuclid-upgrade#6fe70df6023c5096178d3378d3d584a9c6940552"
+source = "git+https://github.com/scroll-tech/reth?branch=zkvm%2Feuclid-upgrade#eb41a605a7efd77c2292a110745179d7d1a5b1de"
 dependencies = [
  "alloy-consensus",
  "alloy-eips",
@@ -5235,7 +5157,7 @@ dependencies = [
 [[package]]
 name = "reth-fs-util"
 version = "1.1.5"
-source = "git+https://github.com/scroll-tech/reth?branch=zkvm%2Feuclid-upgrade#6fe70df6023c5096178d3378d3d584a9c6940552"
+source = "git+https://github.com/scroll-tech/reth?branch=zkvm%2Feuclid-upgrade#eb41a605a7efd77c2292a110745179d7d1a5b1de"
 dependencies = [
  "serde",
  "serde_json",
@@ -5245,7 +5167,7 @@ dependencies = [
 [[package]]
 name = "reth-metrics"
 version = "1.1.5"
-source = "git+https://github.com/scroll-tech/reth?branch=zkvm%2Feuclid-upgrade#6fe70df6023c5096178d3378d3d584a9c6940552"
+source = "git+https://github.com/scroll-tech/reth?branch=zkvm%2Feuclid-upgrade#eb41a605a7efd77c2292a110745179d7d1a5b1de"
 dependencies = [
  "metrics 0.24.1",
  "metrics-derive",
@@ -5254,7 +5176,7 @@ dependencies = [
 [[package]]
 name = "reth-network-peers"
 version = "1.1.5"
-source = "git+https://github.com/scroll-tech/reth?branch=zkvm%2Feuclid-upgrade#6fe70df6023c5096178d3378d3d584a9c6940552"
+source = "git+https://github.com/scroll-tech/reth?branch=zkvm%2Feuclid-upgrade#eb41a605a7efd77c2292a110745179d7d1a5b1de"
 dependencies = [
  "alloy-primitives",
  "alloy-rlp",
@@ -5267,7 +5189,7 @@ dependencies = [
 [[package]]
 name = "reth-nippy-jar"
 version = "1.1.5"
-source = "git+https://github.com/scroll-tech/reth?branch=zkvm%2Feuclid-upgrade#6fe70df6023c5096178d3378d3d584a9c6940552"
+source = "git+https://github.com/scroll-tech/reth?branch=zkvm%2Feuclid-upgrade#eb41a605a7efd77c2292a110745179d7d1a5b1de"
 dependencies = [
  "anyhow",
  "bincode",
@@ -5284,7 +5206,7 @@ dependencies = [
 [[package]]
 name = "reth-primitives"
 version = "1.1.5"
-source = "git+https://github.com/scroll-tech/reth?branch=zkvm%2Feuclid-upgrade#6fe70df6023c5096178d3378d3d584a9c6940552"
+source = "git+https://github.com/scroll-tech/reth?branch=zkvm%2Feuclid-upgrade#eb41a605a7efd77c2292a110745179d7d1a5b1de"
 dependencies = [
  "alloy-consensus",
  "once_cell",
@@ -5297,7 +5219,7 @@ dependencies = [
 [[package]]
 name = "reth-primitives-traits"
 version = "1.1.5"
-source = "git+https://github.com/scroll-tech/reth?branch=zkvm%2Feuclid-upgrade#6fe70df6023c5096178d3378d3d584a9c6940552"
+source = "git+https://github.com/scroll-tech/reth?branch=zkvm%2Feuclid-upgrade#eb41a605a7efd77c2292a110745179d7d1a5b1de"
 dependencies = [
  "alloy-consensus",
  "alloy-eips",
@@ -5326,7 +5248,7 @@ dependencies = [
 [[package]]
 name = "reth-prune-types"
 version = "1.1.5"
-source = "git+https://github.com/scroll-tech/reth?branch=zkvm%2Feuclid-upgrade#6fe70df6023c5096178d3378d3d584a9c6940552"
+source = "git+https://github.com/scroll-tech/reth?branch=zkvm%2Feuclid-upgrade#eb41a605a7efd77c2292a110745179d7d1a5b1de"
 dependencies = [
  "alloy-primitives",
  "derive_more 1.0.0",
@@ -5339,7 +5261,7 @@ dependencies = [
 [[package]]
 name = "reth-revm"
 version = "1.1.5"
-source = "git+https://github.com/scroll-tech/reth?branch=zkvm%2Feuclid-upgrade#6fe70df6023c5096178d3378d3d584a9c6940552"
+source = "git+https://github.com/scroll-tech/reth?branch=zkvm%2Feuclid-upgrade#eb41a605a7efd77c2292a110745179d7d1a5b1de"
 dependencies = [
  "alloy-eips",
  "alloy-primitives",
@@ -5354,7 +5276,7 @@ dependencies = [
 [[package]]
 name = "reth-scroll-chainspec"
 version = "1.1.5"
-source = "git+https://github.com/scroll-tech/reth?branch=zkvm%2Feuclid-upgrade#6fe70df6023c5096178d3378d3d584a9c6940552"
+source = "git+https://github.com/scroll-tech/reth?branch=zkvm%2Feuclid-upgrade#eb41a605a7efd77c2292a110745179d7d1a5b1de"
 dependencies = [
  "alloy-chains",
  "alloy-consensus",
@@ -5377,7 +5299,7 @@ dependencies = [
 [[package]]
 name = "reth-scroll-consensus"
 version = "1.1.5"
-source = "git+https://github.com/scroll-tech/reth?branch=zkvm%2Feuclid-upgrade#6fe70df6023c5096178d3378d3d584a9c6940552"
+source = "git+https://github.com/scroll-tech/reth?branch=zkvm%2Feuclid-upgrade#eb41a605a7efd77c2292a110745179d7d1a5b1de"
 dependencies = [
  "revm 19.4.0",
 ]
@@ -5385,7 +5307,7 @@ dependencies = [
 [[package]]
 name = "reth-scroll-evm"
 version = "1.1.5"
-source = "git+https://github.com/scroll-tech/reth?branch=zkvm%2Feuclid-upgrade#6fe70df6023c5096178d3378d3d584a9c6940552"
+source = "git+https://github.com/scroll-tech/reth?branch=zkvm%2Feuclid-upgrade#eb41a605a7efd77c2292a110745179d7d1a5b1de"
 dependencies = [
  "alloy-consensus",
  "alloy-eips",
@@ -5411,7 +5333,7 @@ dependencies = [
 [[package]]
 name = "reth-scroll-forks"
 version = "1.1.5"
-source = "git+https://github.com/scroll-tech/reth?branch=zkvm%2Feuclid-upgrade#6fe70df6023c5096178d3378d3d584a9c6940552"
+source = "git+https://github.com/scroll-tech/reth?branch=zkvm%2Feuclid-upgrade#eb41a605a7efd77c2292a110745179d7d1a5b1de"
 dependencies = [
  "alloy-chains",
  "alloy-primitives",
@@ -5423,7 +5345,7 @@ dependencies = [
 [[package]]
 name = "reth-scroll-primitives"
 version = "1.1.5"
-source = "git+https://github.com/scroll-tech/reth?branch=zkvm%2Feuclid-upgrade#6fe70df6023c5096178d3378d3d584a9c6940552"
+source = "git+https://github.com/scroll-tech/reth?branch=zkvm%2Feuclid-upgrade#eb41a605a7efd77c2292a110745179d7d1a5b1de"
 dependencies = [
  "alloy-consensus",
  "alloy-eips",
@@ -5447,7 +5369,7 @@ dependencies = [
 [[package]]
 name = "reth-stages-types"
 version = "1.1.5"
-source = "git+https://github.com/scroll-tech/reth?branch=zkvm%2Feuclid-upgrade#6fe70df6023c5096178d3378d3d584a9c6940552"
+source = "git+https://github.com/scroll-tech/reth?branch=zkvm%2Feuclid-upgrade#eb41a605a7efd77c2292a110745179d7d1a5b1de"
 dependencies = [
  "alloy-primitives",
  "bytes",
@@ -5460,7 +5382,7 @@ dependencies = [
 [[package]]
 name = "reth-static-file-types"
 version = "1.1.5"
-source = "git+https://github.com/scroll-tech/reth?branch=zkvm%2Feuclid-upgrade#6fe70df6023c5096178d3378d3d584a9c6940552"
+source = "git+https://github.com/scroll-tech/reth?branch=zkvm%2Feuclid-upgrade#eb41a605a7efd77c2292a110745179d7d1a5b1de"
 dependencies = [
  "alloy-primitives",
  "derive_more 1.0.0",
@@ -5471,7 +5393,7 @@ dependencies = [
 [[package]]
 name = "reth-storage-api"
 version = "1.1.5"
-source = "git+https://github.com/scroll-tech/reth?branch=zkvm%2Feuclid-upgrade#6fe70df6023c5096178d3378d3d584a9c6940552"
+source = "git+https://github.com/scroll-tech/reth?branch=zkvm%2Feuclid-upgrade#eb41a605a7efd77c2292a110745179d7d1a5b1de"
 dependencies = [
  "alloy-consensus",
  "alloy-eips",
@@ -5496,7 +5418,7 @@ dependencies = [
 [[package]]
 name = "reth-storage-errors"
 version = "1.1.5"
-source = "git+https://github.com/scroll-tech/reth?branch=zkvm%2Feuclid-upgrade#6fe70df6023c5096178d3378d3d584a9c6940552"
+source = "git+https://github.com/scroll-tech/reth?branch=zkvm%2Feuclid-upgrade#eb41a605a7efd77c2292a110745179d7d1a5b1de"
 dependencies = [
  "alloy-eips",
  "alloy-primitives",
@@ -5511,7 +5433,7 @@ dependencies = [
 [[package]]
 name = "reth-tracing"
 version = "1.1.5"
-source = "git+https://github.com/scroll-tech/reth?branch=zkvm%2Feuclid-upgrade#6fe70df6023c5096178d3378d3d584a9c6940552"
+source = "git+https://github.com/scroll-tech/reth?branch=zkvm%2Feuclid-upgrade#eb41a605a7efd77c2292a110745179d7d1a5b1de"
 dependencies = [
  "clap",
  "eyre",
@@ -5526,7 +5448,7 @@ dependencies = [
 [[package]]
 name = "reth-trie"
 version = "1.1.5"
-source = "git+https://github.com/scroll-tech/reth?branch=zkvm%2Feuclid-upgrade#6fe70df6023c5096178d3378d3d584a9c6940552"
+source = "git+https://github.com/scroll-tech/reth?branch=zkvm%2Feuclid-upgrade#eb41a605a7efd77c2292a110745179d7d1a5b1de"
 dependencies = [
  "alloy-consensus",
  "alloy-eips",
@@ -5548,7 +5470,7 @@ dependencies = [
 [[package]]
 name = "reth-trie-common"
 version = "1.1.5"
-source = "git+https://github.com/scroll-tech/reth?branch=zkvm%2Feuclid-upgrade#6fe70df6023c5096178d3378d3d584a9c6940552"
+source = "git+https://github.com/scroll-tech/reth?branch=zkvm%2Feuclid-upgrade#eb41a605a7efd77c2292a110745179d7d1a5b1de"
 dependencies = [
  "alloy-consensus",
  "alloy-primitives",
@@ -5571,7 +5493,7 @@ dependencies = [
 [[package]]
 name = "reth-trie-db"
 version = "1.1.5"
-source = "git+https://github.com/scroll-tech/reth?branch=zkvm%2Feuclid-upgrade#6fe70df6023c5096178d3378d3d584a9c6940552"
+source = "git+https://github.com/scroll-tech/reth?branch=zkvm%2Feuclid-upgrade#eb41a605a7efd77c2292a110745179d7d1a5b1de"
 dependencies = [
  "alloy-primitives",
  "alloy-rlp",
@@ -5589,7 +5511,7 @@ dependencies = [
 [[package]]
 name = "reth-trie-sparse"
 version = "1.1.5"
-source = "git+https://github.com/scroll-tech/reth?branch=zkvm%2Feuclid-upgrade#6fe70df6023c5096178d3378d3d584a9c6940552"
+source = "git+https://github.com/scroll-tech/reth?branch=zkvm%2Feuclid-upgrade#eb41a605a7efd77c2292a110745179d7d1a5b1de"
 dependencies = [
  "alloy-primitives",
  "alloy-rlp",
@@ -5604,7 +5526,7 @@ dependencies = [
 [[package]]
 name = "reth-zstd-compressors"
 version = "1.1.5"
-source = "git+https://github.com/scroll-tech/reth?branch=zkvm%2Feuclid-upgrade#6fe70df6023c5096178d3378d3d584a9c6940552"
+source = "git+https://github.com/scroll-tech/reth?branch=zkvm%2Feuclid-upgrade#eb41a605a7efd77c2292a110745179d7d1a5b1de"
 dependencies = [
  "zstd",
 ]
@@ -6009,7 +5931,7 @@ checksum = "28d3b2b1366ec20994f1fd18c3c594f05c5dd4bc44d8bb0c1c632c8d6829481f"
 [[package]]
 name = "sbv-core"
 version = "2.0.0"
-source = "git+https://github.com/scroll-tech/stateless-block-verifier?branch=zkvm%2Feuclid-upgrade#c63ff8b7904692df3243f7a6ed1c7ee56b8c4f5d"
+source = "git+https://github.com/scroll-tech/stateless-block-verifier?branch=zkvm%2Feuclid-upgrade#6759d7b0893e31782e3a24abaad6be655edffdde"
 dependencies = [
  "reth-evm",
  "reth-evm-ethereum",
@@ -6075,7 +5997,7 @@ dependencies = [
 [[package]]
 name = "sbv-trie"
 version = "2.0.0"
-source = "git+https://github.com/scroll-tech/stateless-block-verifier?branch=zkvm%2Feuclid-upgrade#c63ff8b7904692df3243f7a6ed1c7ee56b8c4f5d"
+source = "git+https://github.com/scroll-tech/stateless-block-verifier?branch=zkvm%2Feuclid-upgrade#6759d7b0893e31782e3a24abaad6be655edffdde"
 dependencies = [
  "alloy-rlp",
  "alloy-trie",
@@ -6096,7 +6018,7 @@ checksum = "94143f37725109f92c262ed2cf5e59bce7498c01bcc1502d7b9afe439a4e9f49"
 [[package]]
 name = "scroll-alloy-consensus"
 version = "1.1.5"
-source = "git+https://github.com/scroll-tech/reth?branch=zkvm%2Feuclid-upgrade#6fe70df6023c5096178d3378d3d584a9c6940552"
+source = "git+https://github.com/scroll-tech/reth?branch=zkvm%2Feuclid-upgrade#eb41a605a7efd77c2292a110745179d7d1a5b1de"
 dependencies = [
  "alloy-consensus",
  "alloy-eips",
@@ -6114,7 +6036,7 @@ dependencies = [
 [[package]]
 name = "scroll-alloy-network"
 version = "1.1.5"
-source = "git+https://github.com/scroll-tech/reth?branch=zkvm%2Feuclid-upgrade#6fe70df6023c5096178d3378d3d584a9c6940552"
+source = "git+https://github.com/scroll-tech/reth?branch=zkvm%2Feuclid-upgrade#eb41a605a7efd77c2292a110745179d7d1a5b1de"
 dependencies = [
  "alloy-consensus",
  "alloy-network",
@@ -6128,7 +6050,7 @@ dependencies = [
 [[package]]
 name = "scroll-alloy-rpc-types"
 version = "1.1.5"
-source = "git+https://github.com/scroll-tech/reth?branch=zkvm%2Feuclid-upgrade#6fe70df6023c5096178d3378d3d584a9c6940552"
+source = "git+https://github.com/scroll-tech/reth?branch=zkvm%2Feuclid-upgrade#eb41a605a7efd77c2292a110745179d7d1a5b1de"
 dependencies = [
  "alloy-consensus",
  "alloy-eips",
@@ -6144,8 +6066,8 @@ dependencies = [
 
 [[package]]
 name = "scroll-zkvm-circuit-input-types"
-version = "0.1.0-rc.10"
-source = "git+https://github.com/scroll-tech/zkvm-prover.git?tag=v0.1.0-rc.10#7b89f5a847500ce30a2d5e2d10eff20a19bfbf90"
+version = "0.2.0"
+source = "git+https://github.com/scroll-tech/zkvm-prover.git?tag=v0.2.0#5854f8179d14f2afa489a499290e0ff6a953b314"
 dependencies = [
  "alloy-primitives",
  "alloy-serde 0.8.3",
@@ -6167,8 +6089,8 @@ dependencies = [
 
 [[package]]
 name = "scroll-zkvm-prover"
-version = "0.1.0-rc.10"
-source = "git+https://github.com/scroll-tech/zkvm-prover.git?tag=v0.1.0-rc.10#7b89f5a847500ce30a2d5e2d10eff20a19bfbf90"
+version = "0.2.0"
+source = "git+https://github.com/scroll-tech/zkvm-prover.git?tag=v0.2.0#5854f8179d14f2afa489a499290e0ff6a953b314"
 dependencies = [
  "alloy-primitives",
  "base64 0.22.1",
@@ -6203,8 +6125,8 @@ dependencies = [
 
 [[package]]
 name = "scroll-zkvm-verifier"
-version = "0.1.0-rc.10"
-source = "git+https://github.com/scroll-tech/zkvm-prover.git?tag=v0.1.0-rc.10#7b89f5a847500ce30a2d5e2d10eff20a19bfbf90"
+version = "0.2.0"
+source = "git+https://github.com/scroll-tech/zkvm-prover.git?tag=v0.2.0#5854f8179d14f2afa489a499290e0ff6a953b314"
 dependencies = [
  "bincode",
  "eyre",
@@ -6481,8 +6403,9 @@ dependencies = [
 
 [[package]]
 name = "snark-verifier"
-version = "0.1.8"
-source = "git+https://github.com/axiom-crypto/snark-verifier?branch=zkvm-v0.1#ab65fda41b56571aa33dd27f68ef1ea461e3fadc"
+version = "0.2.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "28e4c4ed1edca41687fe2d8a09ba30badb0a5cc7fa56dd1159d62aeab7c99ace"
 dependencies = [
  "halo2-base",
  "halo2-ecc",
@@ -6502,8 +6425,9 @@ dependencies = [
 
 [[package]]
 name = "snark-verifier-sdk"
-version = "0.1.8"
-source = "git+https://github.com/axiom-crypto/snark-verifier?branch=zkvm-v0.1#ab65fda41b56571aa33dd27f68ef1ea461e3fadc"
+version = "0.2.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "babff70ce6292fce03f692d68569f76b8f6710dbac7be7fe5f32c915909c9065"
 dependencies = [
  "ark-std 0.3.0",
  "bincode",
@@ -6546,16 +6470,6 @@ source = "git+https://github.com/scroll-tech/sppark.git?branch=sp1-v3.0#07fe0de4
 dependencies = [
  "cc",
  "which",
-]
-
-[[package]]
-name = "stability"
-version = "0.2.1"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "d904e7009df136af5297832a3ace3370cd14ff1546a232f4f185036c2736fcac"
-dependencies = [
- "quote",
- "syn 2.0.100",
 ]
 
 [[package]]
@@ -7769,4 +7683,4 @@ dependencies = [
 [[package]]
 name = "zstd"
 version = "1.1.4"
-source = "git+https://github.com/scroll-tech/reth?branch=zkvm%2Feuclid-upgrade#6fe70df6023c5096178d3378d3d584a9c6940552"
+source = "git+https://github.com/scroll-tech/reth?branch=zkvm%2Feuclid-upgrade#eb41a605a7efd77c2292a110745179d7d1a5b1de"

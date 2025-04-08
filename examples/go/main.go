@@ -15,13 +15,14 @@ import (
 )
 
 func main() {
+	var hardfork_name = "euclidv2"
 	// init
 	C.init(C.CString(string("assets/")))
 	
 	// get vks
-	chunk_vk := C.get_chunk_vk()
-	batch_vk := C.get_batch_vk()
-	bundle_vk := C.get_bundle_vk()
+	chunk_vk := C.get_chunk_vk(C.CString(string(hardfork_name)))
+	batch_vk := C.get_batch_vk(C.CString(string(hardfork_name)))
+	bundle_vk := C.get_bundle_vk(C.CString(string(hardfork_name)))
 	defer C.free_vk(chunk_vk)
 	defer C.free_vk(batch_vk)
 	defer C.free_vk(bundle_vk)
@@ -35,7 +36,7 @@ func main() {
 
 	// chunk test
 	chunk_input := loadChunkInputs("testdata/")
-	chunk_proof := C.generate_chunk_proof(C.CString(string(chunk_input)))
+	chunk_proof := C.generate_chunk_proof(C.CString(string(chunk_input)), C.CString(string(hardfork_name)))
 	defer C.free_proof(chunk_proof)
 	go_chunk_proof := C.GoString(chunk_proof)
 	fmt.Println("Chunk proof:", go_chunk_proof)
