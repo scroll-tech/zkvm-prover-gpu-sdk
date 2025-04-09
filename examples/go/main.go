@@ -35,23 +35,27 @@ func main() {
 	fmt.Println("Bundle VK:", go_bundle_vk)
 
 	// chunk test
-	chunk_input := loadChunkInputs("testdata/chunk", 10320016, 10320016)
+	chunk_input := loadChunkInputs("testdata/chunk", 1, 8)
 	chunk_proof := C.generate_chunk_proof(C.CString(string(chunk_input)), C.CString(string(hardfork_name)))
 	defer C.free_proof(chunk_proof)
 	go_chunk_proof := C.GoString(chunk_proof)
 	fmt.Println("Chunk proof:", go_chunk_proof)
 	fmt.Println("Succeed to generate chunk proof!")
-	
-	// TODO: add verifier for chunk proof
+	C.free_proof(chunk_proof)
 
 	// TODO: batch test
-
+	batch_input := loadBatchInputs("testdata/batch/")
+	batch_proof := C.generate_batch_proof(C.CString(string(chunk_input)), C.CString(string(hardfork_name)))
+	defer C.free_proof(chunk_proof)
+	go_chunk_proof := C.GoString(chunk_proof)
+	fmt.Println("Batch proof:", go_chunk_proof)
+	fmt.Println("Succeed to generate batch proof!")
 	// TODO: bundle test
 }
 
 func loadChunkInputs(tdPath string, blockStart, blockEnd int64) string {
 	blocks := make([]string, blockEnd-blockStart)
-	for block := blockStart; block < blockEnd; block++ {
+	for block := blockStart; block <= blockEnd; block++ {
 		fileName := fmt.Sprintf("%d.json", block)
 		filePath := filepath.Join(tdPath, fileName)
 		blockWitness, err := os.ReadFile(filePath)
@@ -62,4 +66,12 @@ func loadChunkInputs(tdPath string, blockStart, blockEnd int64) string {
 	}
 	chunkInputs := "[" + strings.Join(blocks, ",") + "]"
 	return chunkInputs
+}
+
+func loadBatchInputs(filePath string) string {
+	batchInput, err := os.ReadFile(filePath)
+	if err != nil {
+		panic(err)
+	}
+	return string(batchInput)
 }
