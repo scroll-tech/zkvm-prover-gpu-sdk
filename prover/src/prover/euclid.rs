@@ -85,7 +85,7 @@ impl EuclidProver {
                 let proof = self.chunk_prover.gen_proof(&ChunkProvingTask {
                     block_witnesses: witnesses,
                     prev_msg_queue_hash: Default::default(),
-                    fork_name: Default::default(),
+                    fork_name,
                 })?;
 
                 Ok(serde_json::to_string(&proof)?)
