@@ -35,7 +35,7 @@ func main() {
 	fmt.Println("Bundle VK:", go_bundle_vk)
 
 	// chunk test
-	chunk_input := loadChunkInputs("testdata/")
+	chunk_input := loadChunkInputs("testdata/chunk", 10320016, 10320016)
 	chunk_proof := C.generate_chunk_proof(C.CString(string(chunk_input)), C.CString(string(hardfork_name)))
 	defer C.free_proof(chunk_proof)
 	go_chunk_proof := C.GoString(chunk_proof)
@@ -49,10 +49,7 @@ func main() {
 	// TODO: bundle test
 }
 
-func loadChunkInputs(tdPath string) string {
-	blockStart := 10319966
-	blockEnd := 10319974
-
+func loadChunkInputs(tdPath string, blockStart, blockEnd int64) string {
 	blocks := make([]string, blockEnd-blockStart)
 	for block := blockStart; block < blockEnd; block++ {
 		fileName := fmt.Sprintf("%d.json", block)
