@@ -22,7 +22,7 @@ fn generate_proof(
 ) -> *mut c_char {
     let prover = prover::get_prover().unwrap();
     let input_str = c_char_to_str(input).to_string();
-    let fork_name_str = c_char_to_str(input).to_string();
+    let fork_name_str = c_char_to_str(fork_name).to_string();
 
     match prover
         .as_ref()
